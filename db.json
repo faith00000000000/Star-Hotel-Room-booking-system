@@ -1,0 +1,50 @@
+{
+  "user": [
+    {
+      "id": "1",
+      "email": "abc@gmail.com",
+      "password": "12345",
+      "name": "ram",
+      "phone": "1234567890"
+    },
+    {
+      "id": "2",
+      "email": "b@gmail.com",
+      "password": "1234",
+      "name": "rami",
+      "phone": "123456"
+    },
+    {
+      "id": "00f1",
+      "name": "c",
+      "email": "abc",
+      "phone": "123",
+      "password": "abc",
+      "": ""
+    },
+    {
+      "id": "ac8f",
+      "name": "c",
+      "email": "abc",
+      "phone": "123",
+      "password": "abc",
+      "": ""
+    },
+    {
+      "id": "3e5f",
+      "name": "c",
+      "email": "abc",
+      "phone": "123",
+      "password": "abc",
+      "": ""
+    },
+    {
+      "id": "3a26",
+      "name": "c",
+      "email": "abc",
+      "phone": "123",
+      "password": "abc",
+      "": ""
+    }
+  ]
+}

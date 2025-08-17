@@ -1,0 +1,138 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    /* background: url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb') no-repeat center center/cover; */
+    /* height: 100vh; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Overlay for contrast */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 0;
+}
+
+/* Glassmorphic Card */
+.signup-container {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 40px 30px;
+    width: 350px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    animation: fadeIn 0.9s ease-in-out;
+}
+
+/* Title */
+h2 {
+    text-align: center;
+    color: #FFD700;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+h2::after {
+    content: "";
+    display: block;
+    height: 3px;
+    width: 40px;
+    background: #FFD700;
+    margin: 8px auto 20px;
+    border-radius: 2px;
+}
+
+/* Subtitle */
+.signup-subtitle {
+    text-align: center;
+    color: #eee;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* Form Groups */
+.form-group {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.92);
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    background: #fff;
+    outline: 2px solid #FFD700;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #FFD700, #b8860b);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #b8860b, #FFD700);
+    transform: translateY(-2px);
+}
+
+/* Note Text */
+.note {
+    font-size: 12px;
+    text-align: center;
+    color: #ddd;
+    margin-top: 12px;
+}
+
+.note a {
+    color: #FFD700;
+    text-decoration: none;
+}
+
+.note a:hover {
+    text-decoration: underline;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 400px) {
+    .signup-container {
+        width: 90%;
+        padding: 30px 20px;
+    }
+}

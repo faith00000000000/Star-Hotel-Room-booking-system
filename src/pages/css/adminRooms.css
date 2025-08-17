@@ -1,0 +1,31 @@
+.admin-container {
+  display: flex;
+}
+
+.admin-content {
+  margin-left: 220px; /* matches sidebar width */
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.filters {
+  margin-bottom: 20px;
+}
+
+.filters select {
+  margin-right: 10px;
+  padding: 8px;
+}
+
+.room-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.room-card {
+  background: #f8f9fa;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+}
