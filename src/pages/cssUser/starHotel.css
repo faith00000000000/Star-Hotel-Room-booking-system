@@ -1,0 +1,473 @@
+/* ========== GLOBAL ========== */
+/* ========== HEADER / NAVBAR ========== */
+.starhotel-header {
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid #eee;
+}
+
+.starhotel-header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px 20px;
+}
+
+.starhotel-header-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.starhotel-header-nav-logo img {
+  height: 40px;
+}
+
+/* Nav Links */
+.starhotel-header-nav-lists {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  list-style: none;   /* 🚀 removes bullets */
+  margin: 0;
+  padding: 0;
+}
+
+
+.starhotel-header-nav-link {
+  color: #444;
+  font-weight: 500;
+  font-size: 15px;
+  text-decoration: none;   /* 🚀 removes underline */
+  transition: color 0.3s ease;
+}
+
+.starhotel-header-nav-link:hover {
+  color: #d4af37;
+  text-decoration: none;   /* keep it clean on hover */
+}
+
+.starhotel-header-btn {
+  background: #d4af37;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;   /* 🚀 no underline */
+  transition: background 0.3s ease;
+}
+
+
+.starhotel-header-active {
+  color: #d4af37;
+  font-weight: 600;
+}
+
+/* Register Button */
+.starhotel-header-btn {
+  background: #d4af37;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.starhotel-header-btn:hover {
+  background: #b8962f;
+}
+
+/* Hamburger Menu (hidden on desktop) */
+.starhotel-header-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.starhotel-header-hamburger div {
+  width: 25px;
+  height: 3px;
+  background: #444;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .starhotel-header-nav-lists {
+    display: none; /* Hide menu on mobile */
+  }
+  .starhotel-header-hamburger {
+    display: flex;
+  }
+}
+
+/* ========== HERO SECTION ========== */
+.starhotel-hero {
+  position: relative;
+  background: url("../../assets/img/Homepage-jumbotron.webp") no-repeat center center/cover;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.starhotel-hero-overlay {
+  background: rgba(0, 0, 0, 0.5); /* dark overlay */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8%;
+  box-sizing: border-box;
+}
+
+.starhotel-hero-text {
+  max-width: 50%;
+}
+
+.starhotel-hero-text h1 {
+  font-size: 40px;
+  line-height: 1.3;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.starhotel-hero-text p {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #f1f1f1;
+}
+
+.starhotel-booking-form {
+  background: #fff;
+  color: #333;
+  padding: 30px 25px;
+  border-radius: 10px;
+  max-width: 350px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+.starhotel-booking-form h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.starhotel-booking-form p {
+  font-size: 14px;
+  margin-bottom: 15px;
+  color: #666;
+}
+
+.starhotel-booking-form input,
+.starhotel-booking-form select,
+.starhotel-booking-form button {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.starhotel-booking-form button {
+  background: #d4af37;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.starhotel-booking-form button:hover {
+  background: #b8962f;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .starhotel-hero-overlay {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .starhotel-hero-text {
+    max-width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .starhotel-booking-form {
+    max-width: 100%;
+  }
+}
+
+/* ========== JUMBOTRON ========== */
+.starhotel-jumbotron-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 20px;
+  gap: 30px;
+}
+
+.starhotel-jumbotron-left {
+  flex: 1;
+}
+
+.starhotel-jumbotron-header {
+  font-size: 32px;
+  color: #222;
+  margin-bottom: 15px;
+}
+
+.starhotel-jumbotron-left p {
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.starhotel-jumbotron-right {
+  flex: 1;
+}
+
+.starhotel-jumbotron-form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.starhotel-jumbotron-form h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+.starhotel-jumbotron-form p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.starhotel-jumbotron-form input,
+.starhotel-jumbotron-form button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.starhotel-jumbotron-form button {
+  background: #d4af37;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.starhotel-jumbotron-form button:hover {
+  background: #b8962f;
+}
+
+/* ========== ENJOY SECTION ========== */
+.starhotel-enjoy-container {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.starhotel-enjoy-header h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.starhotel-horizontal {
+  width: 60px;
+  margin: 10px auto;
+  border: 2px solid #d4af37;
+}
+
+.starhotel-enjoy-services {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.starhotel-first-col,
+.starhotel-sec-col {
+  flex: 1;
+}
+
+.starhotel-first-col img,
+.starhotel-sec-col img {
+  height: 35px;
+  margin-bottom: 10px;
+}
+
+.starhotel-third-col {
+  flex: 1;
+}
+
+.starhotel-third-col-video {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* ========== OFFERS SECTION ========== */
+.starhotel-special-offers {
+  background: #fff;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.starhotel-page-header {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.starhotel-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.starhotel-col {
+  flex: 1;
+}
+
+.starhotel-image-col img {
+  width: 100%;
+  margin-bottom: 12px;
+  border-radius: 6px;
+}
+
+.starhotel-offers-sub-title {
+  margin-bottom: 15px;
+  color: #555;
+}
+
+.starhotel-offers-list {
+  margin-bottom: 20px;
+}
+
+.starhotel-offers-list li {
+  margin: 6px 0;
+  font-weight: 500;
+}
+
+/* ========== REVIEWS ========== */
+.starhotel-review-container {
+  padding: 60px 20px;
+  text-align: center;
+  background: #f4f4f4;
+}
+
+.starhotel-review-title {
+  font-size: 26px;
+}
+
+.starhotel-cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.starhotel-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.starhotel-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.starhotel-card h2 {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.starhotel-card h3 {
+  font-size: 14px;
+  color: #888;
+  margin: 0 0 10px;
+}
+
+.starhotel-card p {
+  font-size: 14px;
+  color: #555;
+}
+
+/* ========== FOOTER ========== */
+.starhotel-footer {
+  background: #222;
+  color: #ccc;
+  padding: 40px 20px;
+}
+
+.starhotel-footer-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.starhotel-footer-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.starhotel-footer-nav h3 {
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.starhotel-footer-nav p,
+.starhotel-footer-nav a {
+  font-size: 14px;
+  color: #bbb;
+}
+
+.starhotel-footer-nav a:hover {
+  color: #d4af37;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 900px) {
+  .starhotel-jumbotron-container,
+  .starhotel-enjoy-services,
+  .starhotel-row {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .starhotel-header-nav-lists {
+    display: none; /* Hide menu on mobile */
+  }
+
+  .starhotel-header-hamburger {
+    display: flex;
+  }
+}

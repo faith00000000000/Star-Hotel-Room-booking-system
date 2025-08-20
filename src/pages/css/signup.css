@@ -1,138 +1,74 @@
-body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    /* background: url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb') no-repeat center center/cover; */
-    /* height: 100vh; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+/* Overlay background */
+.signup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: -1;
 }
 
-/* Overlay for contrast */
-.overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 0;
-}
-
-/* Glassmorphic Card */
+/* Container */
 .signup-container {
-    position: relative;
-    z-index: 1;
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(12px);
-    border-radius: 16px;
-    padding: 40px 30px;
-    width: 350px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.35);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    animation: fadeIn 0.9s ease-in-out;
+  max-width: 360px; /* smaller width */
+  margin: 50px auto;
+  background: #fff;
+  padding: 25px; /* smaller padding */
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  text-align: center;
 }
 
-/* Title */
-h2 {
-    text-align: center;
-    color: #FFD700;
-    font-weight: 700;
-    margin-bottom: 8px;
-    letter-spacing: 1px;
+.signup-container h2 {
+  margin-bottom: 18px;
+  font-size: 20px; /* smaller font */
+  color: #333;
 }
 
-h2::after {
-    content: "";
-    display: block;
-    height: 3px;
-    width: 40px;
-    background: #FFD700;
-    margin: 8px auto 20px;
-    border-radius: 2px;
+/* Form group */
+.signup-form-group {
+  margin-bottom: 14px;
+  text-align: left;
 }
 
-/* Subtitle */
-.signup-subtitle {
-    text-align: center;
-    color: #eee;
-    font-size: 14px;
-    margin-bottom: 20px;
+.signup-form-group label {
+  display: block;
+  font-size: 13px; /* smaller label font */
+  color: #555;
+  margin-bottom: 5px;
 }
 
-/* Form Groups */
-.form-group {
-    margin-bottom: 18px;
-}
-
-label {
-    display: block;
-    color: #fff;
-    font-weight: 500;
-    margin-bottom: 6px;
-    font-size: 14px;
-}
-
-input {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: none;
-    font-size: 14px;
-    background: rgba(255, 255, 255, 0.92);
-    transition: all 0.3s ease;
-}
-
-input:focus {
-    background: #fff;
-    outline: 2px solid #FFD700;
-    box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+.signup-form-group input {
+  width: 100%;
+  padding: 8px; /* smaller input padding */
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
 }
 
 /* Button */
-button {
-    width: 100%;
-    padding: 12px;
-    background: linear-gradient(135deg, #FFD700, #b8860b);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.signup-container button {
+  width: 100%;
+  padding: 10px; /* smaller button */
+  background: #d4af37;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 15px; /* smaller text */
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-button:hover {
-    background: linear-gradient(135deg, #b8860b, #FFD700);
-    transform: translateY(-2px);
+.signup-container button:hover {
+  background: #b8962f;
 }
 
-/* Note Text */
-.note {
-    font-size: 12px;
-    text-align: center;
-    color: #ddd;
-    margin-top: 12px;
-}
-
-.note a {
-    color: #FFD700;
-    text-decoration: none;
-}
-
-.note a:hover {
-    text-decoration: underline;
-}
-
-/* Animation */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Responsive */
-@media (max-width: 400px) {
-    .signup-container {
-        width: 90%;
-        padding: 30px 20px;
-    }
+/* Note */
+.signup-note {
+  margin-top: 10px;
+  font-size: 12px; /* smaller text */
+  color: #777;
 }

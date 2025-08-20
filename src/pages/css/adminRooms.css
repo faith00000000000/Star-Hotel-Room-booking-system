@@ -1,31 +1,173 @@
-.admin-container {
+.adminRoom-container {
   display: flex;
+  font-family: Arial, sans-serif;
+  color: #000;
+  height: 100vh;
 }
 
-.admin-content {
-  margin-left: 220px; /* matches sidebar width */
+/* Sidebar */
+.adminRoom-sidebar {
+  width: 220px;
+  background: linear-gradient(180deg, #6366f1, #4f46e5);
+  color: #fff;
   padding: 20px;
-  flex-grow: 1;
 }
 
-.filters {
-  margin-bottom: 20px;
+.adminRoom-sidebar h2 {
+  margin-bottom: 30px;
 }
 
-.filters select {
-  margin-right: 10px;
-  padding: 8px;
-}
-
-.room-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+.adminRoom-sidebar nav {
+  display: flex;
+  flex-direction: column;
   gap: 15px;
 }
 
-.room-card {
-  background: #f8f9fa;
-  border: 1px solid #ddd;
+.adminRoom-sidebar a {
+  color: #ddd;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.adminRoom-sidebar a.active,
+.adminRoom-sidebar a:hover {
+  color: #fff;
+}
+
+/* Main Content */
+.adminRoom-main {
+  flex: 1;
+  padding: 20px;
+  background: #f9fafb;
+  overflow-y: auto;
+}
+
+.adminRoom-main header h1 {
+  margin-bottom: 5px;
+}
+
+.adminRoom-main header p {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* Filters */
+.adminRoom-filters {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.adminRoom-filters select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.adminRoom-add-btn {
+  margin-left: auto;
+  background: #4f46e5;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 179px;
+}
+
+/* Cards */
+.adminRoom-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.adminRoom-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.adminRoom-card-image {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: #fff;
+  font-size: 40px;
+  text-align: center;
+  padding: 40px 0;
+}
+
+.adminRoom-card-body {
   padding: 15px;
-  border-radius: 8px;
+}
+
+.adminRoom-card-body h3 {
+  margin: 0;
+}
+
+.adminRoom-type {
+  color: #4f46e5;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.adminRoom-price {
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+.adminRoom-status {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.adminRoom-status.available {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.adminRoom-status.occupied {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.adminRoom-status.maintenance {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.adminRoom-amenities {
+  font-size: 14px;
+  margin: 10px 0;
+  color: #555;
+}
+
+.adminRoom-card-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.adminRoom-card-actions .edit-btn {
+  background: #4f46e5;
+  color: #fff;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.adminRoom-card-actions .delete-btn {
+  background: #ef4444;
+  color: #fff;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }

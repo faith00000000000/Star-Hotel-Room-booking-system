@@ -1,0 +1,350 @@
+/* ----------------------------------------------- */
+/* ---------------- INITIAL SETUP ---------------- */
+/* ----------------------------------------------- */
+
+* {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+body {
+    font-size: 18px;
+}
+
+main {
+    color: #241E09;
+}
+
+/* ----------------------------------------------- */
+/* -------------------- LAYOUT ------------------- */
+/* ----------------------------------------------- */
+.star-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+.star-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.star-col {
+    padding: 5px;
+    flex-wrap: nowrap;
+}
+
+.star-image-col {
+    margin-right: 7%;
+}
+
+.star-image-col img {
+    margin: 5px;
+}
+
+.star-small-image {
+    height: 105px;
+}
+
+.star-large-image {
+    height: 227px;
+}
+
+.star-side-by-side-container {
+    display: flex;
+}
+
+.star-large-image-container {
+    margin-right: 7px;
+}
+
+.star-stacked-image-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1px;
+}
+
+.star-col-3 {
+    width: 33%;
+    text-align: center;
+}
+
+.star-col-2 {
+    margin: 0 20px 40px 0;
+}
+
+.star-center-lg {
+    justify-content: center;
+}
+
+/* ----------------------------------------------- */
+/* ---------------- HEADER SECTION --------------- */
+/* ----------------------------------------------- */
+.star-page-header-container {
+    margin-bottom: 70px;
+}
+
+.star-page-header {
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+}
+
+hr {
+	border-top: 1.5px solid #d4af37;
+	width: 104px;
+	margin: 0.5rem auto 1rem;
+}
+
+.star-page-sub-header {
+    text-align: center;
+    letter-spacing: 0.01em;
+    font-weight: 300;
+    color: #3b331a;
+}
+
+/* ----------------------------------------------- */
+/* ----------- SPECIAL OFFERS SECTION ------------ */
+/* ----------------------------------------------- */
+.star-special-offers {
+    padding: 0 0 80px;
+}
+
+.star-offers-title {
+    font-size: 165%;
+    margin: 25px 0 15px;
+}
+
+.star-offers-sub-title {
+    font-size: 74%;
+    color: #3b331a;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+.star-offers-list {
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+.star-offers-list li {
+    margin: 12px 0;
+}
+
+.star-list-icon {
+    height: 17px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.star-list-text {
+    display: inline-block;
+    font-size: 69%;
+}
+
+
+.star-btn {
+    border-radius: 3px;
+    border: 1px solid #D4AF37;
+    text-transform: uppercase;
+    font-size: 55%;
+    padding: 10px 18px;
+    font-weight: 400;
+    text-decoration: none;
+    transition: all 0.3s;
+    margin-right: 10px;
+}
+
+.star-btn-fill {
+    background-color: #D4AF37;
+    color: #fff;
+}
+
+.star-btn-fill:hover,
+.star-btn-fill:active {
+    background-color: #c9a633;
+    border: 1px solid #c9a633;
+}
+
+.star-btn-ghost {
+    color: #D4AF37;
+    background-color: #fff;
+}
+
+.star-btn-ghost:hover,
+.star-btn-ghost:active {
+    background-color: #D4AF37;
+    color: #fff;
+}
+
+.star-btn-large {
+    font-size: 65%;
+    padding: 9px 22px;
+}
+
+/* ----------------------------------------------- */
+/* --------------- ROOMS SECTION ----------------- */
+/* ----------------------------------------------- */
+.star-rooms-section {
+    padding: 0 0 40px;
+}
+
+.star-room-section-header-container {
+    margin-bottom: 30px;
+}
+
+.star-room-section-header {
+    color: rgba(36, 30, 9, 0.6);
+    font-weight: 500;
+    font-size: 95%;
+    cursor: pointer;
+}
+
+.star-active-header {
+    color: #241E09;
+}
+
+.star-active-header::after {
+    display: block;
+    height: 1px;
+    background-color: #D4AF37;
+    content: "";
+    width: 90px;
+    margin: 15px auto 0;
+}
+
+.star-room-title {
+    font-size: 90%;
+    font-weight: 600;
+    margin: 15px 0 12px;
+}
+
+.star-room-text{
+    font-size: 70%;
+    font-weight: 300;
+    margin-bottom: 7px;
+    line-height: 132%;
+}
+
+.star-details-container {
+    display: inline-block;
+}
+
+.star-details-container p {
+    margin-right: 5px;
+}
+
+.star-details-container img {
+    margin-right: 0;
+}
+
+.star-amount-text {
+    font-size: 85%;
+    margin-top: 15px;
+    font-weight: 500;
+}
+
+.star-buttons-container {
+    margin-top: 20px;
+}
+
+/* ----------------------------------------------- */
+/* --------------- QUERIES SECTION --------------- */
+/* ----------------------------------------------- */
+
+@media only screen and (max-width: 1029px) {
+    .star-center-md {
+        justify-content: center;
+    }
+}
+@media (max-width: 730px) {
+    .star-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 425px) {
+    .star-container {
+        max-width: 380px;
+        margin: 0 auto;
+        padding: 1.5rem;
+    }
+    .star-image-col {
+        margin: 8px auto;
+    }
+    
+    .star-image-col img {
+        margin: 2px;
+    }
+    
+    .star-small-image {
+        height: 70px;
+    }
+    
+    .star-large-image {
+        height: 151px;
+    }
+    .star-side-by-side-container {
+        display: flex;
+    }
+    
+    .star-large-image-container {
+        margin-right: 7px;
+    }
+    
+    .star-stacked-image-container {
+        display: flex;
+        flex-direction: column;
+        margin-top: 1px;
+    }
+    .star-rooms {
+        width: 350px;
+    }
+    .star-rooms-img {
+        width: 100%;
+    }
+
+}
+@media (max-width: 375px) {
+    .star-container {
+        max-width: 355px;
+        margin: 0 auto;
+        padding: 1.5rem;
+    }
+    .star-image-col {
+        margin: 8px auto;
+    }
+    
+    .star-image-col img {
+        margin: 2px;
+    }
+    
+    .star-small-image {
+        height: 70px;
+    }
+    
+    .star-large-image {
+        height: 151px;
+    }
+    .star-side-by-side-container {
+        display: flex;
+    }
+    
+    .star-large-image-container {
+        margin-right: 7px;
+    }
+    
+    .star-stacked-image-container {
+        display: flex;
+        flex-direction: column;
+        margin-top: 1px;
+    }
+    .star-rooms {
+        width: 350px;
+    }
+    .star-rooms-img {
+        width: 100%;
+    }
+}

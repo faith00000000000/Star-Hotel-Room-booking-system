@@ -1,61 +1,98 @@
-import React, { useState } from "react";
-import Sidebar from "../Admin/Sidebar.js"; // Import Sidebar
+import React, { useLayoutEffect, useState } from "react";
 import "../css/adminRooms.css";
+import { getAllRooms } from "../../services/room";
 
-const AdminRooms = () => {
-  const [selectedRoomType, setSelectedRoomType] = useState("All Types");
-  const [selectedStatus, setSelectedStatus] = useState("All Status");
-  const [selectedFloor, setSelectedFloor] = useState("All Floors");
+const AdminRoom = () => {
+  const [rooms,setRooms] = useState([]);
 
-  const rooms = [
-    { id: 101, name: "Room 101", type: "Standard", status: "Available", floor: 1 },
-    { id: 102, name: "Room 102", type: "Deluxe", status: "Booked", floor: 2 },
-    { id: 201, name: "Room 201", type: "Suite", status: "Available", floor: 2 },
-  ];
-
-  const filteredRooms = rooms.filter(
-    (room) =>
-      (selectedRoomType === "All Types" || room.type === selectedRoomType) &&
-      (selectedStatus === "All Status" || room.status === selectedStatus) &&
-      (selectedFloor === "All Floors" || room.floor.toString() === selectedFloor)
-  );
+  useLayoutEffect(()=>{
+    getAllRooms().then(
+      (response)=>{
+        if(response.data.length>0){
+          setRooms(response.data)
+        }
+      }
+    )
+  },[])
 
   return (
-    <div className="admin-container">
-      <Sidebar />
-      <div className="admin-content">
-        <h1>Manage Rooms</h1>
-        <div className="filters">
-          <select value={selectedRoomType} onChange={(e) => setSelectedRoomType(e.target.value)}>
+    <div className="adminRoom-container">
+      {/* Sidebar */}
+      <aside className="adminRoom-sidebar">
+        <h2>Hotel Admin</h2>
+        <nav>
+          <a href="#">Dashboard</a>
+          <a href="#" className="active">Rooms</a>
+          <a href="#">Bookings</a>
+          <a href="#">Customers</a>
+          <a href="#">Settings</a>
+        </nav>
+      </aside>
+
+      {/* Main Content */}
+      <main className="adminRoom-main">
+        <header>
+          <h1>Room Management</h1>
+          <p>Manage your hotel rooms and availability</p>
+        </header>
+
+        {/* Filters */}
+        <div className="adminRoom-filters">
+          <select defaultValue="All Types">
             <option>All Types</option>
-            <option>Standard</option>
-            <option>Deluxe</option>
+            <option>Standard Single</option>
+            <option>Deluxe Double</option>
             <option>Suite</option>
+            <option>Presidential Suite</option>
           </select>
-          <select value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)}>
+
+          <select defaultValue="All Status">
             <option>All Status</option>
             <option>Available</option>
-            <option>Booked</option>
+            <option>Occupied</option>
+            <option>Maintenance</option>
           </select>
-          <select value={selectedFloor} onChange={(e) => setSelectedFloor(e.target.value)}>
+
+          <select defaultValue="All Floors">
             <option>All Floors</option>
-            <option value="1">Floor 1</option>
-            <option value="2">Floor 2</option>
+            <option>Floor 1</option>
+            <option>Floor 2</option>
+            <option>Floor 3</option>
           </select>
+
+          <button className="adminRoom-add-btn">+ Add New Room</button>
         </div>
-        <div className="room-list">
-          {filteredRooms.map((room) => (
-            <div className="room-card" key={room.id}>
-              <h3>{room.name}</h3>
-              <p>Type: {room.type}</p>
-              <p>Status: {room.status}</p>
-              <p>Floor: {room.floor}</p>
+
+        {/* Room Cards */}
+        <div className="adminRoom-cards">
+          {rooms.map((room,index) => (
+            <div key={index} className="adminRoom-card">
+              <div className="adminRoom-card-image">
+                <img src={room.image} alt="picture"></img>
+              </div>
+              <div className="adminRoom-card-body">
+                <h3>{room.roomNo}</h3>
+                <p className="adminRoom-type">{room.type}</p>
+                <p className="adminRoom-price">${room.price}/night</p>
+                {/* <span className={`adminRoom-status ${room.status.toLowerCase()}`}>
+                  {room.status}
+                </span> */}
+
+                {/* <p className="adminRoom-amenities">
+                  {room.facilities.join(" • ")}
+                </p> */}
+
+                <div className="adminRoom-card-actions">
+                  <button className="edit-btn">Edit</button>
+                  <button className="delete-btn">Delete</button>
+                </div>
+              </div>
             </div>
           ))}
         </div>
-      </div>
+      </main>
     </div>
   );
 };
 
-export default AdminRooms;
+export default AdminRoom;

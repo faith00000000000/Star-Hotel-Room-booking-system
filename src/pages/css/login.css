@@ -7,7 +7,7 @@ body, html {
 
 .login-page {
     position: relative;
-    /* height: 100vh; */
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -61,8 +61,8 @@ input {
     border: none;
     font-size: 14px;
     background: rgba(255, 255, 255, 0.9);
-    transition: 0.3s;
-}
+    transition: 0.3s; }
+
 
 input:focus {
     background: #fff;
