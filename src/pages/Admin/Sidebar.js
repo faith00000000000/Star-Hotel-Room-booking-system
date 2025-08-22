@@ -1,27 +1,27 @@
 // src/components/Sidebar.js
 import React from "react";
-import { Link } from "react-router"; // since you're using react-router
-
+import { NavLink } from "react-router";  // <-- should be react-router-dom, not react-router
 import "../css/Sidebar.css";
 
 const Sidebar = () => {
   return (
-    <div className="sidebar">
-      <h2 className="sidebar-title">Admin Panel</h2>
-      <ul className="sidebar-menu">
+    <aside className="bm-sidebar">
+      <div className="bm-sidebar-header">Hotel Admin</div>
+      <ul className="bm-sidebar-menu">
         <li>
-          <Link to="/admin/rooms">Manage Rooms</Link>
+          <NavLink to="/admin" className={({isActive}) => isActive ? "bm-active-link" : ""}>Home</NavLink>
         </li>
         <li>
-          <Link to="/admin/bookings">Manage Bookings</Link>
+          <NavLink to="/admin/adminPanel" className={({isActive}) => isActive ? "bm-active-link" : ""}>Dashboard</NavLink>
         </li>
         <li>
-          <Link to="/admin/users">Manage Users</Link>
+          <NavLink to="/admin/adminRooms" className={({isActive}) => isActive ? "bm-active-link" : ""}>Rooms</NavLink>
         </li>
-        
-        
+        <li>
+          <NavLink to="/admin/bookingManagement" className={({isActive}) => isActive ? "bm-active-link" : ""}>Bookings</NavLink>
+        </li>
       </ul>
-    </div>
+    </aside>
   );
 };
 

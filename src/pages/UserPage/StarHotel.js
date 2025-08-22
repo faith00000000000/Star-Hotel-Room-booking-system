@@ -1,7 +1,5 @@
 import React from "react";
 import "../cssUser/starHotel.css";
-
-// ✅ Import all images from assets/img
 import clockIcon from "../../assets/img/clock.svg";
 import checkIcon from "../../assets/img/check-square.svg";
 import coffeeIcon from "../../assets/img/coffee.svg";
@@ -14,108 +12,58 @@ import customer1 from "../../assets/img/customer1.webp";
 import customer2 from "../../assets/img/customer2.webp";
 import customer3 from "../../assets/img/customer3.webp";
 import { useNavigate } from "react-router";
+import Header from "./Header";   
 
 export default function StarHotel() {
-  const navigate=useNavigate()
+  const navigate = useNavigate();
+
   return (
     <div>
-      {/* Header */}
-      <header className="starhotel-header">
-        <div className="starhotel-header-container">
-          <nav className="starhotel-header-nav-bar">
-            <div className="starhotel-header-nav-logo">
-              <a href="/">
-                <img
-                  src="https://res.cloudinary.com/joshuafolorunsho/image/upload/v1591615159/star_hotels_logo.png"
-                  alt="star hotels logo"
-                />
-              </a>
-            </div>
-            <ul className="starhotel-header-nav-lists">
-              <li>
-                <a
-                  className="starhotel-header-nav-link starhotel-header-active"
-                  href="/"
-                >
-                  Home
-                </a>
-              </li>
-              <li>
-                <a
-                  className="starhotel-header-nav-link"
-                  href="/roomsAndSuites" 
-                >
-                  Rooms and Suites
-                </a>
-              </li>
-              <li>
-                <a className="starhotel-header-nav-link" href="/findBooking">
-                  Find my Booking
-                </a>
-              </li>
-              <li>
-                <a className="starhotel-header-nav-link" href="/login">
-                  Login
-                </a>
-              </li>
-              <li>
-                <a className="starhotel-header-btn" href="/signup">
-                  Register
-                </a>
-              </li>
-            </ul>
-            <div className="starhotel-header-hamburger">
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
-          </nav>
+      <Header />   
+
+      {/* Hero Section */}
+      <section className="starhotel-hero">
+        <div className="starhotel-hero-overlay">
+          {/* Left Text */}
+          <div className="starhotel-hero-text">
+            <h1>
+              Discover The Perfect Balance <br />
+              Of Hospitality, Luxury And <br />
+              Comfort.
+            </h1>
+            <p>
+              We are focused on providing clients with the highest level
+              of comfort and excellent affordable rates
+            </p>
+            <a href="/booking" className="starhotel-btn starhotel-btn-fill">
+              Book Now
+            </a>
+          </div>
+
+          {/* Right Booking Form */}
+          <div className="starhotel-booking-form">
+            <h3>Scared you can't afford it?</h3>
+            <p>
+              Don’t worry, our hotel offers the best <br />
+              affordable rates you can ever find.
+            </p>
+            <form>
+              <input type="date" placeholder="Arrival Date" />
+              <input type="date" placeholder="Departure Date" />
+              <input type="number" placeholder="Guests" />
+              <select>
+                <option>Room type</option>
+                <option>Standard Room</option>
+                <option>Executive Room</option>
+                <option>King Suite</option>
+              </select>
+              <button type="submit" className="starhotel-btn starhotel-btn-fill">
+                Search
+              </button>
+            </form>
+          </div>
         </div>
-      </header>
-
-     {/* Hero Section */}
-<section className="starhotel-hero">
-  <div className="starhotel-hero-overlay">
-    {/* Left Text */}
-    <div className="starhotel-hero-text">
-      <h1>
-        Discover The Perfect Balance <br />
-        Of Hospitality, Luxury And <br />
-        Comfort.
-      </h1>
-      <p>
-        We are focused on providing clients with the highest level
-        of comfort and excellent affordable rates
-      </p>
-      <a href="/booking" className="starhotel-btn starhotel-btn-fill">
-        Book Now
-      </a>
-    </div>
-
-    {/* Right Booking Form */}
-    <div className="starhotel-booking-form">
-      <h3>Scared you can't afford it?</h3>
-      <p>
-        Don’t worry, our hotel offers the best <br />
-        affordable rates you can ever find.
-      </p>
-      <form>
-        <input type="date" placeholder="Arrival Date" />
-        <input type="date" placeholder="Departure Date" />
-        <input type="number" placeholder="Guests" />
-        <select>
-          <option>Room type</option>
-          <option>Standard Room</option>
-          <option>Executive Room</option>
-          <option>King Suite</option>
-        </select>
-        <button type="submit" className="starhotel-btn starhotel-btn-fill">
-          Search
-        </button>
-      </form>
-    </div>
-  </div>
-</section>
+      </section>
 
 
       {/* Enjoy Section */}
@@ -203,9 +151,9 @@ export default function StarHotel() {
         our rooms and suites are second to none in the universe.
       </p>
       <ul>
-        <li>✔ Standard Room</li>
-        <li>✔ Executive Room</li>
-        <li>✔ King Suite</li>
+        <li> Standard Room</li>
+        <li> Executive Room</li>
+        <li> King Suite</li>
       </ul>
       <a
         href="/rooms-and-suites"

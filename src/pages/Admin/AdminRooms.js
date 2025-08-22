@@ -43,22 +43,15 @@ const AdminRoom = () => {
             <option>Standard Single</option>
             <option>Deluxe Double</option>
             <option>Suite</option>
-            <option>Presidential Suite</option>
           </select>
 
           <select defaultValue="All Status">
             <option>All Status</option>
             <option>Available</option>
             <option>Occupied</option>
-            <option>Maintenance</option>
           </select>
 
-          <select defaultValue="All Floors">
-            <option>All Floors</option>
-            <option>Floor 1</option>
-            <option>Floor 2</option>
-            <option>Floor 3</option>
-          </select>
+          
 
           <button className="adminRoom-add-btn">+ Add New Room</button>
         </div>

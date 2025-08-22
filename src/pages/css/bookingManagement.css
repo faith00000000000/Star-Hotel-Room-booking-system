@@ -1,104 +1,118 @@
 /* Layout */
-.container {
+.bm-container {
   display: flex;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
+  background: #f4f6f9;
 }
 
-.sidebar {
-  width: 220px;
-  background: #2c3e50;
+.bm-sidebar {
+  width: 240px;
+  background: linear-gradient(180deg, #4e73df, #224abe);
   color: #fff;
   padding: 20px;
 }
 
-.sidebar h2 {
-  margin-bottom: 20px;
-  text-align: center;
+.bm-sidebar-header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 30px;
 }
 
-.sidebar ul {
+.bm-sidebar-menu {
   list-style: none;
+  padding: 0;
 }
 
-.sidebar ul li {
-  padding: 12px;
-  margin: 8px 0;
-  cursor: pointer;
-  border-radius: 6px;
+.bm-sidebar-menu li {
+  margin: 12px 0;
 }
 
-.sidebar ul li.active,
-.sidebar ul li:hover {
-  background: #1abc9c;
+.bm-sidebar-menu a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9rem;
 }
 
-/* Main content */
-.main-content {
+.bm-active-link {
+  font-weight: bold;
+  color: #ffd700;
+}
+
+/* Main */
+.bm-main-content {
   flex: 1;
   padding: 20px;
-  overflow-y: auto;
-  background: #f9f9f9;
 }
 
-.main-content h1 {
-  margin-bottom: 20px;
-  font-size: 24px;
-}
-
-/* Horizontal Form */
-.booking-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
+/* Card */
+.bm-card {
   background: #fff;
-  padding: 15px;
+  padding: 16px;
+  margin-bottom: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-.booking-form input,
-.booking-form button {
-  padding: 8px 12px;
+/* Header */
+.bm-header h1 {
+  font-size: 1.3rem;
+  margin-bottom: 6px;
+}
+.bm-header p {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Filters */
+.bm-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+  gap: 12px;
+}
+.bm-filters label {
+  font-size: 0.75rem;
+  color: #555;
+  display: block;
+  margin-bottom: 4px;
+}
+.bm-filters input,
+.bm-filters select {
+  width: 100%;
+  padding: 6px 10px;
   border: 1px solid #ccc;
   border-radius: 6px;
 }
 
-.booking-form input {
-  flex: 1;
-  min-width: 150px;
-}
-
-.booking-form button {
-  background: #1abc9c;
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.booking-form button:hover {
-  background: #16a085;
-}
-
-/* Booking Table */
-.booking-table {
+/* Table */
+.bm-table {
   width: 100%;
   border-collapse: collapse;
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
 }
-
-.booking-table th,
-.booking-table td {
-  padding: 12px;
+.bm-table th,
+.bm-table td {
+  padding: 10px;
   border: 1px solid #ddd;
+}
+.bm-table th {
+  background: #f1f3f7;
   text-align: left;
 }
-
-.booking-table th {
-  background: #2c3e50;
-  color: white;
+.bm-status.confirmed {
+  color: green;
+  font-weight: 600;
+}
+.bm-status.pending {
+  color: orange;
+  font-weight: 600;
+}
+.bm-btn {
+  padding: 5px 10px;
+  background: #4e73df;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.bm-btn:hover {
+  background: #224abe;
 }

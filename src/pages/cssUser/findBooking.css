@@ -1,78 +1,164 @@
-/* .bookinghistory-page {
-  font-family: Arial, sans-serif;
+/* ========== PAGE LAYOUT ========== */
+.bookinghistory-page {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: #f9f9f9;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  padding-bottom: 40px;
 }
 
+/* ========== HEADER ========== */
+.starhotel-header {
+  background: #222;
+  color: #fff;
+  padding: 12px 0;
+}
+
+.starhotel-header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.starhotel-header-nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.starhotel-header-nav-logo a {
+  color: #fff;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.starhotel-header-nav-lists {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.starhotel-header-nav-lists li a {
+  color: #ddd;
+  transition: color 0.2s;
+}
+
+.starhotel-header-nav-lists li a:hover {
+  color: #fff;
+}
+
+.starhotel-header-active {
+  color: #00a8e8 !important;
+  font-weight: bold;
+}
+
+.starhotel-header-btn {
+  background: #00a8e8;
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: #fff !important;
+}
+
+/* ========== SECTION ========== */
 .bookinghistory-container {
-  max-width: 1000px;
-  margin: 80px auto;
-  background: white;
-  padding: 40px;
+  max-width: 1100px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 25px;
   border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .bookinghistory-container h2 {
-  font-size: 28px;
-  color: #333;
   margin-bottom: 20px;
-  text-align: center;
+  font-size: 22px;
+  border-left: 4px solid #00a8e8;
+  padding-left: 10px;
+  color: #333;
 }
 
-.no-bookings {
-  text-align: center;
-  color: #777;
-  font-size: 16px;
-}
-
+/* ========== TABLE ========== */
 .bookinghistory-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
 }
 
 .bookinghistory-table th,
 .bookinghistory-table td {
   border: 1px solid #ddd;
-  padding: 12px 15px;
-  text-align: center;
-}
-
-.bookinghistory-table th {
-  background: #d4af37;
-  color: white;
-  font-size: 16px;
-}
-
-.bookinghistory-table tr:nth-child(even) {
-  background: #f9f9f9;
-}
-
-.bookinghistory-table tr:hover {
-  background: #f1f1f1;
-}
-
-.status {
-  padding: 5px 12px;
-  border-radius: 8px;
-  font-weight: bold;
+  padding: 10px 14px;
+  text-align: left;
   font-size: 14px;
 }
 
+.bookinghistory-table th {
+  background: #f4f6f8;
+  font-weight: bold;
+}
+
+.bookinghistory-table tr:nth-child(even) {
+  background: #fafafa;
+}
+
+.no-bookings {
+  color: #666;
+  font-style: italic;
+}
+
+/* ========== STATUS BADGES ========== */
+.status {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
 .status.confirmed {
-  background: #e0f7e9;
-  color: #2e7d32;
+  background: #d4edda;
+  color: #155724;
 }
 
 .status.completed {
-  background: #e6f0ff;
-  color: #1e40af;
+  background: #cce5ff;
+  color: #004085;
 }
 
 .status.pending {
   background: #fff3cd;
   color: #856404;
-} */
+}
+
+/* ========== CHECKOUT BUTTON ========== */
+.checkout-btn {
+  margin-top: 15px;
+  background: #00a8e8;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  display: inline-block;
+}
+
+.checkout-btn:hover {
+  background: #007bbf;
+}
+/* Cancel Button (only in Pending section) */
+.cancel-btn {
+  background: #dc3545;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.cancel-btn:hover {
+  background: #b02a37;
+}
+

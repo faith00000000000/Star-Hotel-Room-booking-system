@@ -9,6 +9,11 @@ export const getAllRooms= async()=>{
     return data;
 }
 
+export const getRoomById = async(id)=>{
+  const data = await axios.get(`http://localhost:4000/rooms/${id}`)
+  return data
+}
+
 export const fileToBase64 = (file) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();

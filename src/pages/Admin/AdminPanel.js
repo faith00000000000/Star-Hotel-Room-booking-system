@@ -3,21 +3,13 @@ import "../css/adminPanel.css";
 
 
 import React from "react";
+import Sidebar from "./Sidebar";
 
 const AdminPanel = () => {
  return (
     <div className="dashboard-container">
-      {/* Sidebar */}
-      <aside className="sidebar">
-        <div className="sidebar-header">Hotel Admin</div>
-        <ul className="sidebar-menu">
-          <li className="active">Dashboard</li>
-          <li>Rooms</li>
-          <li>Bookings</li>
-          <li>Customers</li>
-          <li>Settings</li>
-        </ul>
-      </aside>
+      <Sidebar/>
+  
 
       {/* Main Content */}
       <main className="main-content">

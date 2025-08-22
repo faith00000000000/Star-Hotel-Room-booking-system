@@ -22,6 +22,7 @@ const Login = () => {
         logUserIn(email,password).then((response)=>{
             if(response.data.length>0){
                 console.log("successful");
+                localStorage.setItem("authToken",response.data[0].id)
                 toast.success("login successful");
                 navigate("/adminPanel",{replace:true});
             }

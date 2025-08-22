@@ -2,6 +2,7 @@ import React, { useLayoutEffect, useState } from "react";
 import "../cssUser/roomsAndSuites.css";
 import RoomListRow from "./RoomListRow";
 import { getAllRooms } from "../../services/room";
+import Header from "./Header";
 
 export default function RoomsAndSuites() {
 
@@ -21,54 +22,10 @@ export default function RoomsAndSuites() {
   )
   return (
     <>
-    <h1>hiiiiiiiiiiii</h1>
-      {/* Header */}
-      <header>
-        <div className="star-header-container">
-          <nav className="star-header-nav-bar">
-            <div className="star-header-nav-logo">
-              <a href="index.html">
-                <img
-                  src="https://res.cloudinary.com/joshuafolorunsho/image/upload/v1591615159/star_hotels_logo.png"
-                  alt="star hotels logo"
-                />
-              </a>
-            </div>
-            <ul className="star-header-nav-lists">
-              <li className="star-header-nav-list">
-                <a
-                  className="star-header-nav-link star-header-active"
-                  href="index.html">Home
-                </a>
-              </li>
-              <li className="star-header-nav-list">
-                <a className="star-header-nav-link" href="rooms-and-suites.html">Rooms and Suites
-                </a>
-              </li>
-              <li className="star-header-nav-list">
-                <a className="star-header-nav-link" href="findBooking.html">Find my Booking
-                </a>
-              </li>
-              <li className="star-header-nav-list">
-                <a className="star-header-nav-link" href="login.html">Login
-                </a>
-              </li>
-              <li className="star-header-nav-list">
-                <a
-                  className="star-header-btn star-header-btn-custom"
-                  href="signup.html">Register
-                </a>
-              </li>
-            </ul>
+      <div>
+            < Header/>
 
-            <div className="star-header-hamburger-icon">
-              <div className="star-header-hamburger-line-1"></div>
-              <div className="star-header-hamburger-line-2"></div>
-              <div className="star-header-hamburger-line-3"></div>
-            </div>
-          </nav>
-        </div>
-      </header>
+    </div>
 
       {/* Main */}
       <main>
@@ -85,7 +42,7 @@ export default function RoomsAndSuites() {
 
           {/* Rooms */}
           <section className="star-rooms-section">
-            <div className="star-row star-room-section-header-container">
+            {/* <div className="star-row star-room-section-header-container">
               <div className="star-col star-col-3">
                 <h4
                   className="star-room-section-header star-active-header"
@@ -104,7 +61,7 @@ export default function RoomsAndSuites() {
                   King Suites
                 </h4>
               </div>
-            </div>
+            </div> */}
 
             <div className="star-row star-center-lg">
 

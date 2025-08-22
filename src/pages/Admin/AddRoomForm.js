@@ -3,10 +3,10 @@ import "../css/addRoomForm.css";
 import { addRooms, fileToBase64 } from "../../services/room";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
-// import { status } from "server/reply";
 
 const AddRoomForm = () => {
-  const navigate=useNavigate()
+  const navigate = useNavigate();
+
   const [roomData, setRoomData] = useState({
     roomNo: "",
     roomName: "",
@@ -14,10 +14,11 @@ const AddRoomForm = () => {
     price: "",
     description: "",
     facilities: [],
-    status:"unbooked",
+    status: "unbooked",
     image: "",
   });
 
+  const [errors, setErrors] = useState({});
 
   const facilitiesOptions = ["Wi-Fi", "TV", "AC", "Mini Bar", "Balcony", "Room Service"];
 
@@ -32,67 +33,64 @@ const AddRoomForm = () => {
   };
 
   const handleFileChange = async (e) => {
-    const file = e.target.files[0]
-    if(file){
-      const base64Image = await fileToBase64(e.target.files[0])
-      setRoomData({ ...roomData, image: base64Image  });
-    } 
-    };
+    const file = e.target.files[0];
+    if (file) {
+      const base64Image = await fileToBase64(file);
+      setRoomData({ ...roomData, image: base64Image });
+    }
+  };
+
+  const validateForm = () => {
+    let formErrors = {};
+
+    if (roomData.roomNo.trim() === "") formErrors.roomNo = "Room number is required.";
+    if (roomData.roomName.trim() === "") formErrors.roomName = "Room name is required.";
+    if (roomData.description.trim() === "") formErrors.description = "Description is required.";
+    if (roomData.type.trim() === "") formErrors.type = "Room type is required.";
+    if (roomData.price.trim() === "") formErrors.price = "Price is required.";
+    if (roomData.facilities.length === 0) formErrors.facilities = "Select at least one facility.";
+    if (!roomData.image || roomData.image.trim() === "") formErrors.image = "Room image is required.";
+
+    setErrors(formErrors);
+    return Object.keys(formErrors).length === 0;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    let hasError = false
-    if(roomData.roomNo.trim() === ''){
-      hasError = true
-    }
-    if(roomData.roomName.trim() === ''){
-      hasError = true
-    }
-    if(roomData.description.trim() === ''){
-      hasError = true
-    }
-    if(roomData.type.trim() === ''){
-      hasError = true
-    }
-    if(roomData.price.trim() === ''){
-      hasError = true
-    }
-    if(roomData.facilities.trim() === ''){
-      hasError = true
-    }
-    if(roomData.image.trim() === ''){
-      hasError = true
-    }
-    
-    if(!hasError){
-      addRooms(roomData).then((res)=>{
-        if(res.data){
-          toast.success("Room added successfully!")
-          setRoomData({
-          roomNo: "",
-          roomName: "",
-          type: "Standard",
-          price: "",
-          description: "",
-          facilities: [],
-          image: null,
+    if (validateForm()) {
+      addRooms({ ...roomData, price: Number(roomData.price) })
+        .then((res) => {
+          if (res.data) {
+            toast.success("Room added successfully!");
+            setRoomData({
+              roomNo: "",
+              roomName: "",
+              type: "Standard",
+              price: "",
+              description: "",
+              facilities: [],
+              status: "unbooked",
+              image: "",
+            });
+            setErrors({});
+            navigate("/adminRooms");
+          }
+        })
+        .catch((e) => {
+          toast.error(e.message || "Error adding room");
         });
-          navigate("/adminRooms")
-        }
-        
-      }).catch(e=>{
-        toast.error(e)
-      })
+    } else {
+      toast.error("Please fix the errors before submitting.");
     }
-    
   };
 
   return (
     <div className="add-room-container">
       <h2>Add New Room</h2>
       <form className="add-room-form" onSubmit={handleSubmit}>
-        <span style={{color:"red"}}></span>
+        
+        {/* Room Number */}
         <label>
           Room Number:
           <input
@@ -100,11 +98,11 @@ const AddRoomForm = () => {
             name="roomNo"
             value={roomData.roomNo}
             onChange={handleChange}
-            required
           />
         </label>
+        {errors.roomNo && <span className="error">{errors.roomNo}</span>}
 
-        <span style={{color:"red"}}></span>
+        {/* Room Name */}
         <label>
           Room Name:
           <input
@@ -112,11 +110,11 @@ const AddRoomForm = () => {
             name="roomName"
             value={roomData.roomName}
             onChange={handleChange}
-            required
           />
         </label>
+        {errors.roomName && <span className="error">{errors.roomName}</span>}
 
-        <span style={{color:"red"}}></span>
+        {/* Room Type */}
         <label>
           Room Type:
           <select
@@ -129,8 +127,9 @@ const AddRoomForm = () => {
             <option value="Suite">Suite</option>
           </select>
         </label>
+        {errors.type && <span className="error">{errors.type}</span>}
 
-        <span style={{color:"red"}}></span>
+        {/* Price */}
         <label>
           Price per Night:
           <input
@@ -138,11 +137,11 @@ const AddRoomForm = () => {
             name="price"
             value={roomData.price}
             onChange={handleChange}
-            required
           />
         </label>
+        {errors.price && <span className="error">{errors.price}</span>}
 
-        <span style={{color:"red"}}></span>
+        {/* Description */}
         <label>
           Description:
           <textarea
@@ -150,11 +149,11 @@ const AddRoomForm = () => {
             value={roomData.description}
             onChange={handleChange}
             rows="4"
-            required
           />
         </label>
+        {errors.description && <span className="error">{errors.description}</span>}
 
-        <span style={{color:"red"}}></span>
+        {/* Facilities */}
         <label>
           Facilities:
           <select
@@ -168,8 +167,9 @@ const AddRoomForm = () => {
             ))}
           </select>
         </label>
+        {errors.facilities && <span className="error">{errors.facilities}</span>}
 
-        <span style={{color:"red"}}></span>
+        {/* Image */}
         <label>
           Room Image:
           <input
@@ -179,8 +179,16 @@ const AddRoomForm = () => {
             onChange={handleFileChange}
           />
         </label>
+        {errors.image && <span className="error">{errors.image}</span>}
 
-        <img src={roomData.image}></img>
+        {/* Preview */}
+        {roomData.image && (
+          <img
+            src={roomData.image}
+            alt="Room Preview"
+            style={{ width: "100%", marginTop: "10px", borderRadius: "5px" }}
+          />
+        )}
 
         <button type="submit">Add Room</button>
       </form>

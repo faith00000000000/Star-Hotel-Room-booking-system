@@ -1,0 +1,38 @@
+.cart-container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fafafa;
+}
+
+.cart-item {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.cart-image {
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.cart-details h2 {
+  margin-bottom: 10px;
+}
+
+.confirm-btn {
+  background: #0071eb;
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.confirm-btn:hover {
+  background: #005bb5;
+}

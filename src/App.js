@@ -12,6 +12,10 @@ import StarHotels from './pages/UserPage/StarHotel';
 import RoomsAndSuites from './pages/UserPage/RoomsAndSuites';
 import EditRoom from './pages/Admin/EditRoom';
 import FindBooking from './pages/UserPage/FindBooking';
+import RoomDescriptionPage from './pages/UserPage/RoomDescriptionPage';
+import AdminLayout from './pages/Admin/AdminLayout';
+import CartPage from './pages/UserPage/CartPage';
+import CheckoutPage from './pages/UserPage/CheckoutPage';
 
 
 function App() {
@@ -19,16 +23,27 @@ function App() {
    <>
    <BrowserRouter>
       <Routes>
+
       <Route path= "/signup" element={<Signup/>} ></Route>
-      <Route path= "/login" element={<Login/>} ></Route>
-      <Route path= "/adminPanel" element={<AdminPanel/>}></Route>
-      <Route path= "/adminRooms" element={<AdminRooms/>}></Route>
-      <Route path= "/addRoomForm" element={<AddRoomForm/>}></Route>
-      <Route path= "/bookingManagement" element={<BookingManagement/>}></Route>
-      <Route path= "/roomsAndSuites" element={<RoomsAndSuites/>}></Route>
-      <Route path= "/editRoom" element={<EditRoom/>}></Route>
-      <Route path= "/starHotel" element={<StarHotels/>}></Route>
-      <Route path= "/findBooking" element={<FindBooking/>}></Route>
+      <Route path= "/login" element={<Login/>} ></Route>  
+
+
+      <Route path= "/" element={<StarHotels/>}></Route>
+        <Route path= "/findBooking" element={<FindBooking/>}></Route>
+        <Route path= "/roomsAndSuites" element={<RoomsAndSuites/>}></Route>
+        <Route path= "/roomDescriptionPage/:id" element={<RoomDescriptionPage/>}></Route>
+        <Route path= "/cartPage" element={<CartPage/>}></Route>
+        <Route path= "/checkoutPage" element={<CheckoutPage/>}></Route>
+
+
+      
+      <Route path="/admin" element={<AdminLayout/>}>
+        <Route path= "/admin/adminPanel" element={<AdminPanel/>}></Route>
+        <Route path= "/admin/adminRooms" element={<AdminRooms/>}></Route>
+        <Route path= "/admin/addRoomForm" element={<AddRoomForm/>}></Route>
+        <Route path= "/admin/bookingManagement" element={<BookingManagement/>}></Route>
+        <Route path= "/admin/editRoom" element={<EditRoom/>}></Route>
+      </Route>
 
 
       </Routes>
