@@ -20,7 +20,14 @@ const AddRoomForm = () => {
 
   const [errors, setErrors] = useState({});
 
-  const facilitiesOptions = ["Wi-Fi", "TV", "AC", "Mini Bar", "Balcony", "Room Service"];
+  const facilitiesOptions = [
+    "Wi-Fi",
+    "TV",
+    "AC",
+    "Mini Bar",
+    "Balcony",
+    "Room Service",
+  ];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,7 +35,7 @@ const AddRoomForm = () => {
   };
 
   const handleFacilitiesChange = (e) => {
-    const options = Array.from(e.target.selectedOptions, option => option.value);
+    const options = Array.from(e.target.selectedOptions, (option) => option.value);
     setRoomData({ ...roomData, facilities: options });
   };
 
@@ -74,7 +81,7 @@ const AddRoomForm = () => {
               image: "",
             });
             setErrors({});
-            navigate("/adminRooms");
+            navigate("/admin/adminRooms");
           }
         })
         .catch((e) => {
@@ -87,9 +94,16 @@ const AddRoomForm = () => {
 
   return (
     <div className="add-room-container">
+      {/* X Button */}
+      <button
+        className="close-btn"
+        onClick={() => navigate("/admin/adminRooms")}
+      >
+        ×
+      </button>
+
       <h2>Add New Room</h2>
       <form className="add-room-form" onSubmit={handleSubmit}>
-        
         {/* Room Number */}
         <label>
           Room Number:
@@ -117,11 +131,7 @@ const AddRoomForm = () => {
         {/* Room Type */}
         <label>
           Room Type:
-          <select
-            name="type"
-            value={roomData.type}
-            onChange={handleChange}
-          >
+          <select name="type" value={roomData.type} onChange={handleChange}>
             <option value="Standard">Standard</option>
             <option value="Executive">Executive</option>
             <option value="Suite">Suite</option>
@@ -163,7 +173,9 @@ const AddRoomForm = () => {
             onChange={handleFacilitiesChange}
           >
             {facilitiesOptions.map((facility, index) => (
-              <option key={index} value={facility}>{facility}</option>
+              <option key={index} value={facility}>
+                {facility}
+              </option>
             ))}
           </select>
         </label>

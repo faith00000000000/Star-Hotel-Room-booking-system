@@ -7,9 +7,9 @@ import { addBooking } from "../../services/booking";
 import { getUserById, updateUserBooking } from "../../services/user";
 
 const RoomDescriptionPage = () => {
-  const {id} = useParams()
-  const [userId,setUserId] = useState()
-  const [bookings,setBookings] = useState([]) 
+  const { id } = useParams();
+  const [userId, setUserId] = useState();
+  const [bookings, setBookings] = useState([]);
   const [room, setRoom] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
@@ -21,26 +21,26 @@ const RoomDescriptionPage = () => {
   });
 
   useEffect(() => {
-    const userId = localStorage.getItem("authToken")
-    if(userId){
-      setUserId(userId)
-      getUserById(userId).then(
-        (response)=>{
-          if(response){
-            setBookings(response.data.bookings)
+    const userId = localStorage.getItem("authToken");
+    const role = localStorage.getItem("role");
+
+    if (role === "user" && userId) {
+      setUserId(userId);
+      getUserById(userId)
+        .then((response) => {
+          if (response) {
+            setBookings(response.data.bookings || []);
           }
-        }
-      )
+        })
+        .catch(() => console.log("No user found"));
     }
-    console.log(id)
-    getRoomById(id).then(
-      (response)=>{
-        if(response){
-          setRoom(response.data)
-        }
+
+    getRoomById(id).then((response) => {
+      if (response) {
+        setRoom(response.data);
       }
-    )
-  }, []);
+    });
+  }, [id]);
 
   if (!room) {
     return <p>Loading room details...</p>;
@@ -52,17 +52,28 @@ const RoomDescriptionPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateUserBooking(userId,)
+
+    // Only users can book
+    if (localStorage.getItem("role") !== "user") {
+      alert("Only registered users can make bookings.");
+      return;
+    }
+
     addBooking({
       ...formData,
-      "roomId":id,
-      "bookingStatus":"pending",
-      "roomName":  room.roomName,
-      "roomType": room.type,
-      "price": room.price,
-      "userId": userId
-    })
-    console.log("Booking Data:", formData);
+      roomId: id,
+      bookingStatus: "pending",
+      roomName: room.roomName,
+      roomType: room.type,
+      price: room.price,
+      userId: userId,
+    });
+
+    updateUserBooking(userId, {
+      ...formData,
+      roomId: id,
+    });
+
     alert("Booking submitted!");
     setShowForm(false);
   };
@@ -119,7 +130,7 @@ const RoomDescriptionPage = () => {
               <input
                 type="text"
                 name="name"
-                value={room.name}
+                value={formData.name}
                 onChange={handleChange}
                 required
               />

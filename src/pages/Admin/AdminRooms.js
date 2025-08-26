@@ -1,6 +1,9 @@
 import React, { useLayoutEffect, useState } from "react";
 import "../css/adminRooms.css";
 import { getAllRooms } from "../../services/room";
+import Sidebar from "./Sidebar";
+import { NavLink } from "react-router";
+
 
 const AdminRoom = () => {
   const [rooms,setRooms] = useState([]);
@@ -18,16 +21,7 @@ const AdminRoom = () => {
   return (
     <div className="adminRoom-container">
       {/* Sidebar */}
-      <aside className="adminRoom-sidebar">
-        <h2>Hotel Admin</h2>
-        <nav>
-          <a href="#">Dashboard</a>
-          <a href="#" className="active">Rooms</a>
-          <a href="#">Bookings</a>
-          <a href="#">Customers</a>
-          <a href="#">Settings</a>
-        </nav>
-      </aside>
+        <Sidebar/>
 
       {/* Main Content */}
       <main className="adminRoom-main">
@@ -41,7 +35,7 @@ const AdminRoom = () => {
           <select defaultValue="All Types">
             <option>All Types</option>
             <option>Standard Single</option>
-            <option>Deluxe Double</option>
+            <option>Executive</option>
             <option>Suite</option>
           </select>
 
@@ -53,7 +47,9 @@ const AdminRoom = () => {
 
           
 
-          <button className="adminRoom-add-btn">+ Add New Room</button>
+           <NavLink to="/admin/adminRooms/addRoomForm">
+            <button className="adminRoom-add-btn">+ Add New Room</button>
+          </NavLink>
         </div>
 
         {/* Room Cards */}
@@ -76,7 +72,11 @@ const AdminRoom = () => {
                 </p> */}
 
                 <div className="adminRoom-card-actions">
-                  <button className="edit-btn">Edit</button>
+                  {/* <button className="edit-btn">Edit</button> */}
+                  <NavLink to={`/admin/editRoom/${room.id}`}>
+                    <button className="edit-btn">Edit Room</button>
+                  </NavLink>
+
                   <button className="delete-btn">Delete</button>
                 </div>
               </div>

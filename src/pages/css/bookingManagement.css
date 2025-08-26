@@ -116,3 +116,13 @@
 .bm-btn:hover {
   background: #224abe;
 }
+.bm-confirm {
+  background-color: #28a745; /* green */
+  color: white;
+}
+
+.bm-confirm-active {
+  background-color: #6c757d; /* gray for already confirmed */
+  color: white;
+  cursor: default;
+}

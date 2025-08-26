@@ -13,6 +13,7 @@ import customer2 from "../../assets/img/customer2.webp";
 import customer3 from "../../assets/img/customer3.webp";
 import { useNavigate } from "react-router";
 import Header from "./Header";   
+import Footer from "./Footer";
 
 export default function StarHotel() {
   const navigate = useNavigate();
@@ -209,7 +210,7 @@ export default function StarHotel() {
       </div>
 
       {/* Footer */}
-      <footer className="starhotel-footer">
+      {/* <footer className="starhotel-footer">
         <div className="starhotel-footer-container">
           <nav className="starhotel-footer-nav">
             <div>
@@ -238,7 +239,9 @@ export default function StarHotel() {
             </div>
           </nav>
         </div>
-      </footer>
+      </footer> */}
+
+      <Footer/>
     </div>
   );
 }

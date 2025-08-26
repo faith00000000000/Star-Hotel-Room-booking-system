@@ -32,7 +32,7 @@ function App() {
         <Route path= "/findBooking" element={<FindBooking/>}></Route>
         <Route path= "/roomsAndSuites" element={<RoomsAndSuites/>}></Route>
         <Route path= "/roomDescriptionPage/:id" element={<RoomDescriptionPage/>}></Route>
-        <Route path= "/cartPage" element={<CartPage/>}></Route>
+        {/* <Route path= "/cartPage" element={<CartPage/>}></Route> */}
         <Route path= "/checkoutPage" element={<CheckoutPage/>}></Route>
 
 
@@ -40,9 +40,9 @@ function App() {
       <Route path="/admin" element={<AdminLayout/>}>
         <Route path= "/admin/adminPanel" element={<AdminPanel/>}></Route>
         <Route path= "/admin/adminRooms" element={<AdminRooms/>}></Route>
-        <Route path= "/admin/addRoomForm" element={<AddRoomForm/>}></Route>
+        <Route path= "/admin/adminRooms/addRoomForm" element={<AddRoomForm/>}></Route>
         <Route path= "/admin/bookingManagement" element={<BookingManagement/>}></Route>
-        <Route path= "/admin/editRoom" element={<EditRoom/>}></Route>
+        <Route path= "/admin/editRoom/:id" element={<EditRoom/>}></Route>
       </Route>
 
 

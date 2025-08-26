@@ -1,74 +1,94 @@
-/* Overlay background */
-.signup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: -1;
+/* Full page background */
+.signup-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background:  rgb(227, 227, 222); /* same as login */
+  font-family: "Segoe UI", sans-serif;
 }
 
-/* Container */
+/* Signup card container */
 .signup-container {
-  max-width: 360px; /* smaller width */
-  margin: 50px auto;
   background: #fff;
-  padding: 25px; /* smaller padding */
-  border-radius: 8px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  max-width: 420px;
   text-align: center;
+  border-top: 6px solid #d4af37; /* brand gold accent */
 }
 
 .signup-container h2 {
-  margin-bottom: 18px;
-  font-size: 20px; /* smaller font */
+  font-size: 22px;
+  margin-bottom: 25px;
   color: #333;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 /* Form group */
 .signup-form-group {
-  margin-bottom: 14px;
+  margin-bottom: 18px;
   text-align: left;
 }
 
 .signup-form-group label {
   display: block;
-  font-size: 13px; /* smaller label font */
-  color: #555;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
 }
 
 .signup-form-group input {
   width: 100%;
-  padding: 8px; /* smaller input padding */
-  font-size: 14px;
+  padding: 12px 14px;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  transition: 0.3s ease;
+}
+
+.signup-form-group input:focus {
+  border-color: #d4af37;
+  box-shadow: 0 0 6px rgba(212, 175, 55, 0.4);
 }
 
 /* Button */
 .signup-container button {
   width: 100%;
-  padding: 10px; /* smaller button */
+  padding: 12px;
   background: #d4af37;
   border: none;
-  border-radius: 5px;
-  color: white;
-  font-size: 15px; /* smaller text */
-  font-weight: bold;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: 0.3s;
 }
 
 .signup-container button:hover {
   background: #b8962f;
+  transform: translateY(-2px);
 }
 
-/* Note */
+/* Footer note */
 .signup-note {
-  margin-top: 10px;
-  font-size: 12px; /* smaller text */
-  color: #777;
+  margin-top: 18px;
+  font-size: 14px;
+  color: #555;
+}
+
+.signup-note a {
+  color: #d4af37;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.signup-note a:hover {
+  text-decoration: underline;
 }

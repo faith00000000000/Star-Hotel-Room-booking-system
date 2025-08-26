@@ -1,7 +1,16 @@
 import React from "react";
-import '../cssUser/starHotel.css';
+import { useNavigate } from "react-router";
+import "../cssUser/starHotel.css";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const isLoggedIn = localStorage.getItem("authToken"); // check if logged in
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken"); // clear token
+    navigate("/"); // redirect to login
+  };
+
   return (
     <header className="starhotel-header">
       <div className="starhotel-header-container">
@@ -34,16 +43,30 @@ const Header = () => {
                 Find my Booking
               </a>
             </li>
-            <li>
-              <a className="starhotel-header-nav-link" href="/login">
-                Login
-              </a>
-            </li>
-            <li>
-              <a className="starhotel-header-btn" href="/signup">
-                Register
-              </a>
-            </li>
+
+            {isLoggedIn ? (
+              <li>
+                <button
+                  className="starhotel-header-btn logout-btn"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              </li>
+            ) : (
+              <>
+                <li>
+                  <a className="starhotel-header-nav-link" href="/login">
+                    Login
+                  </a>
+                </li>
+                <li>
+                  <a className="starhotel-header-btn" href="/signup">
+                    Register
+                  </a>
+                </li>
+              </>
+            )}
           </ul>
 
           <div className="starhotel-header-hamburger">

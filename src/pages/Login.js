@@ -1,64 +1,82 @@
 import React, { useState } from "react";
 import "../pages/css/login.css";
 import { logUserIn } from "../services/Auth";
-import { useNavigate } from "react-router";
+import { useNavigate, NavLink } from "react-router";
 import { toast } from "react-toastify";
 
 const Login = () => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    const[email, setEmail]=useState("");
-    const[password, setPassword]=useState("");
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    const handleEmailChange=(e)=>{
-        setEmail(e.target.value);
+    // 🔹 Static Admin Login
+    if (email === "admin@gmail.com" && password === "admin123") {
+      localStorage.setItem("authToken", "admin");
+      localStorage.setItem("role", "admin"); // save role
+      toast.success("Admin login successful");
+      navigate("/adminPanel", { replace: true });
+      return;
     }
 
-    const handlePasswordChange=(e)=>{
-        setPassword(e.target.value);
-    }
+    // 🔹 Normal User Login (from DB)
+    logUserIn(email, password)
+      .then((response) => {
+        if (response.data.length > 0) {
+          const user = response.data[0];
 
-    const handleSubmit=(e) =>{
-        logUserIn(email,password).then((response)=>{
-            if(response.data.length>0){
-                console.log("successful");
-                localStorage.setItem("authToken",response.data[0].id)
-                toast.success("login successful");
-                navigate("/adminPanel",{replace:true});
-            }
+          localStorage.setItem("authToken", user.id); // save user id
+          localStorage.setItem("role", "user");       // save role
+
+          toast.success("Login successful");
+          navigate("/", { replace: true }); // redirect to homepage
+        } else {
+          toast.error("Invalid email or password");
         }
-    )
-    }
+      })
+      .catch(() => {
+        toast.error("Login failed. Try again.");
+      });
+  };
 
   return (
     <div className="login-page">
-      <div className="overlay"></div>
       <div className="login-container">
-        <h2>Hotel Star Admin Login</h2>
-        <form action="#" method="post">
+        <h2 className="login-title">Hotel Star Login</h2>
+        <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
-            <label htmlFor="email">Email Address</label>
             <input
               type="email"
               id="email"
-              name="email"
-              placeholder="admin@hotelstar.com" onChange={handleEmailChange}
+              placeholder="Email Address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
+              className="form-input"
             />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Password</label>
             <input
               type="password"
               id="password"
-              name="password"
-              placeholder="********" onChange={handlePasswordChange}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
+              className="form-input"
             />
           </div>
-          <button type="button" onClick={handleSubmit}>Login</button>
-          <p className="note">
-            By logging in, you agree to our Terms & Privacy Policy.
+          <button type="submit" className="login-btn">
+            Login
+          </button>
+
+          <p className="login-footer">
+            Don’t have an account?{" "}
+            <NavLink to="/signup" className="signup-link">
+              Sign Up
+            </NavLink>
           </p>
         </form>
       </div>

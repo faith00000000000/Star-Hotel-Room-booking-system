@@ -1,24 +1,45 @@
+const FindBookingRow = ({ bookings, onCancel, showCancel = true, showExtra = false }) => {
+  return bookings.map((b, index) => {
+    // safety checks
+    const checkInDate = b.checkIn ? new Date(b.checkIn) : null;
+    const checkOutDate = b.checkOut ? new Date(b.checkOut) : null;
 
-const FindBookingRow = (props)=>{
-    return props.bookings.map(
-        (b,index)=>{
-            return(
-                <tr key={index}>
-                  <td>{b.id}</td>
-                  <td>{b.roomName}</td>
-                  <td>{b.roomType}</td>
-                  <td>{b.checkIn}</td>
-                  <td>{b.checkOut}</td>
-                  <td>
-                    <span className={`status ${b.status}`}>
-                      {b.bookingStatus}
-                    </span>
-                  </td>
-                  <td> <button>Cancel</button></td>
-                </tr>
-            )
-        }
-    )
-}
+    const nights =
+      checkInDate && checkOutDate
+        ? (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24)
+        : 0;
 
-export default FindBookingRow
+    const total = b.price && nights ? nights * b.price : 0;
+
+    return (
+      <tr key={index}>
+        <td>{b.id}</td>
+
+        {showExtra && <td>{b.name || "-"}</td>}
+
+        <td>{b.roomName || "-"}</td>
+        <td>{b.roomType || "-"}</td>
+        <td>{b.checkIn || "-"}</td>
+        <td>{b.checkOut || "-"}</td>
+
+        {showExtra && <td>{nights || "-"}</td>}
+        {showExtra && <td>₨ {b.price || 0}</td>}
+        {showExtra && <td>₨ {total.toLocaleString()}</td>}
+
+        <td>
+          <span className={`status ${b.bookingStatus}`}>
+            {b.bookingStatus}
+          </span>
+        </td>
+
+        {showCancel && (
+          <td>
+            <button onClick={() => onCancel(b.id)}>Cancel</button>
+          </td>
+        )}
+      </tr>
+    );
+  });
+};
+
+export default FindBookingRow;

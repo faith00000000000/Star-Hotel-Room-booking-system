@@ -3,6 +3,7 @@ import "../cssUser/roomsAndSuites.css";
 import RoomListRow from "./RoomListRow";
 import { getAllRooms } from "../../services/room";
 import Header from "./Header";
+import Footer from "./Footer";
 
 export default function RoomsAndSuites() {
 
@@ -21,12 +22,8 @@ export default function RoomsAndSuites() {
     },[]
   )
   return (
-    <>
-      <div>
-            < Header/>
-
-    </div>
-
+    <>       
+      < Header/>
       {/* Main */}
       <main>
         <div className="star-container">
@@ -66,81 +63,14 @@ export default function RoomsAndSuites() {
             <div className="star-row star-center-lg">
 
               <RoomListRow rooms={room}/>
-              {/* Room Card */}
               
-              {/* Repeat other room cards like above */}
             </div>
           </section>
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="star-footer">
-        <div className="star-footer-container">
-          <nav className="star-footer-nav">
-            <div className="star-footer-description">
-              <h3 className="star-footer-description-title">Star Hotels</h3>
-              <p>Hospitality and Comfort are our watchwords</p>
-            </div>
-            <div className="star-footer-contact-us">
-              <h3 className="star-footer-description-title">Contact Us</h3>
-              <p className="star-footer-description-detail">
-                <img
-                  src="./assets/img/map-pin.svg"
-                  className="star-footer-description-icon"
-                  alt="star hotel location"
-                />
-                <span>23, Fola Osibo, Lekki Phase 1</span>
-              </p>
-              <p className="star-footer-description-detail">
-                <img
-                  src="./assets/img/phone.svg"
-                  className="star-footer-description-icon"
-                  alt="star hotels phone number"
-                />
-                <span>08185956620</span>
-              </p>
-              <p className="star-footer-description-detail">
-                <img
-                  src="./assets/img/mail.svg"
-                  className="star-footer-description-icon"
-                  alt="star hotels email"
-                />
-                <span>support@starhotels.com</span>
-              </p>
-            </div>
-            <div className="star-footer-follow-us">
-              <h3 className="star-footer-description-title">Follow Us</h3>
-              <ul className="star-footer-follow-us-lists">
-                <li className="star-follow-us-list">
-                  <a href="">
-                    <img
-                      src="./assets/img/facebook.svg"
-                      alt="star hotels facebook page"
-                    />
-                  </a>
-                </li>
-                <li className="star-follow-us-list">
-                  <a href="">
-                    <img
-                      src="./assets/img/twitter.svg"
-                      alt="star hotels twitter page"
-                    />
-                  </a>
-                </li>
-                <li className="star-follow-us-list">
-                  <a href="">
-                    <img
-                      src="./assets/img/instagram.svg"
-                      alt="star hotels instagram page"
-                    />
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </nav>
-        </div>
-      </footer>
+      <Footer/>
     </>
   );
 }

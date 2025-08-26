@@ -1,60 +1,127 @@
 import React, { useEffect, useState } from "react";
 import "../cssUser/checkoutPage.css";
-import { useParams } from "react-router";
-import { getBookingData, getBookingDataById } from "../../services/booking";
+import { getBookingData, updateBookingData } from "../../services/booking";
+import Header from "./Header";
+import { toast } from "react-toastify";
 
 const CheckoutPage = () => {
-  // Mock data for demo (later this can come from cart/booking context)
-  const [bookedRooms,setBookedRooms] = useState([])
-  const [total,setTotal] = useState(0)
+  const [bookedRooms, setBookedRooms] = useState([]);
+  const [total, setTotal] = useState(0);
 
-  useEffect(()=>{
-    let id = localStorage.getItem("authToken")
-    getBookingData().then(
-      (response)=>{
-        if(response.data.length>0){
-          response.data.map(
-            (item,index)=>{
-              if(item.userId.trim() === id.trim()){
-                setBookedRooms((prev)=>[...prev,item])
-                setTotal((prev)=> prev + ((new Date(item.checkOut) - new Date(item.checkIn))/(1000 * 60 * 60 * 24))*item.price)
-              }
-            }
-          )
-        }
+  useEffect(() => {
+    let id = localStorage.getItem("authToken");
+    getBookingData().then((response) => {
+      if (response.data.length > 0) {
+        let bookingInfo = [];
+        let totalAmount = 0;
+
+        response.data.forEach((item) => {
+          if (item.userId === id && item.paidStatus !== "paid") {
+            bookingInfo.push(item);
+            const nights =
+              (new Date(item.checkOut) - new Date(item.checkIn)) /
+              (1000 * 60 * 60 * 24);
+            totalAmount += nights * item.price;
+          }
+        });
+        setBookedRooms(bookingInfo);
+        setTotal(totalAmount);
+      }
+    });
+  }, []);
+
+  const hadleCheckout= ()=>{
+    console.log(bookedRooms)
+    bookedRooms.forEach(
+      (rooms)=>{
+        rooms.paidStatus = "paid"
+        updateBookingData(rooms.id,rooms)
       }
     )
-  },[])
-
-
+    setBookedRooms(bookedRooms)
+    toast.success("Payment Successful")
+    
+  }
 
   return (
-    <div className="bill-container">
-      <h2 className="bill-title">Booking Bill</h2>
+    <div>
+      <Header />
+      <div className="checkout-container">
+  {/* Bill + Invoice section */}
+  <div className="checkout-top">
+    <div className="bill-to">
+      <h4>Bill To</h4>
+      {bookedRooms.length > 0 ? (
+        <>
+          <p><strong>Guest Name:</strong> {bookedRooms[0].name}</p>
+          <p><strong>Email:</strong> {bookedRooms[0].email}</p>
+          <p><strong>Phone:</strong> {bookedRooms[0].phone}</p>
+        </>
+      ) : (
+        <>
+          <p><strong>Guest Name:</strong> Not Available</p>
+          <p><strong>Email:</strong> Not Available</p>
+          <p><strong>Phone:</strong> Not Available</p>
+        </>
+      )}
+    </div>
 
-      <div className="bill-table">
-        <div className="bill-header">
-          <span>Room</span>
-          <span>Check-In</span>
-          <span>Check-Out</span>
-          <span>Price</span>
+    <div className="invoice-details">
+      <h4>Invoice Details</h4>
+      <p><strong>Invoice Date:</strong> {new Date().toDateString()}</p>
+      <p><strong>Due Date:</strong> {new Date().toDateString()}</p>
+      <p><strong>Total Bookings:</strong> {bookedRooms.length} Reservations</p>
+      <p>
+        <strong>Payment Status:</strong>{" "}
+        <span className="pending">Pending</span>
+      </p>
+    </div>
+  </div>
+
+
+
+        {/* Table */}
+        <div className="checkout-table">
+          <div className="checkout-header">
+            <span>Room Description</span>
+            <span>Check-In</span>
+            <span>Check-Out</span>
+            <span>Nights</span>
+            <span>Amount (₨)</span>
+          </div>
+
+          {bookedRooms.map((room, index) => {
+            const nights =
+              (new Date(room.checkOut) - new Date(room.checkIn)) /
+              (1000 * 60 * 60 * 24);
+            const amount = nights * room.price;
+
+            return (
+              <div className="checkout-row" key={index}>
+                <span>{room.roomName}</span>
+                <span>{room.checkIn}</span>
+                <span>{room.checkOut}</span>
+                <span>{nights}</span>
+                <span>₨ {amount.toLocaleString()}</span>
+              </div>
+            );
+          })}
         </div>
 
-        {bookedRooms.map((room,index) => (
-          <div className="bill-row" key={index}>
-            <span>{room.roomName}</span>
-            <span>{room.checkIn}</span>
-            <span>{room.checkOut}</span>
-            <span>${ ((new Date(room.checkOut) - new Date(room.checkIn))/(1000 * 60 * 60 * 24))*room.price}</span>
-          </div>
-        ))}
-      </div>
+        {/* Summary */}
+        <div className="checkout-summary">
+          <p><strong>Subtotal:</strong> ₨ {total.toLocaleString()}</p>
+          <p><strong>Service Charge (0%):</strong> ₨ 0</p>
+          <p><strong>Tax (0%):</strong> ₨ 0</p>
+          <h3>Total Amount: ₨ {total.toLocaleString()}</h3>
+        </div>
 
-      <div className="bill-summary">
-        <p><strong>Total:</strong> Nrs. {total}</p>
+        {/* Payment Button */}
+        <div className="payment-section">
+          <p className="payment-text">Ready to Complete Your Payment?</p>
+          <button className="confirm-btn" onClick={hadleCheckout}>Confirm Payment</button>
+        </div>
       </div>
-
-      <button className="confirm-btn">Confirm Payment</button>
     </div>
   );
 };
