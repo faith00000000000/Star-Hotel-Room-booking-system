@@ -1,6 +1,6 @@
 // src/components/Sidebar.js
 import React from "react";
-import { NavLink } from "react-router";  // <-- should be react-router-dom, not react-router
+import { NavLink } from "react-router";  
 import "../css/Sidebar.css";
 
 const Sidebar = () => {

@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, NavLink } from "react-router";
 import "../cssUser/starHotel.css";
 
 const Header = () => {
@@ -16,32 +16,50 @@ const Header = () => {
       <div className="starhotel-header-container">
         <nav className="starhotel-header-nav-bar">
           <div className="starhotel-header-nav-logo">
-            <a href="/">
+            <NavLink to="/">
               <img
                 src="https://res.cloudinary.com/joshuafolorunsho/image/upload/v1591615159/star_hotels_logo.png"
                 alt="star hotels logo"
               />
-            </a>
+            </NavLink>
           </div>
 
           <ul className="starhotel-header-nav-lists">
             <li>
-              <a
-                className="starhotel-header-nav-link starhotel-header-active"
-                href="/"
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive
+                    ? "starhotel-header-nav-link starhotel-header-active"
+                    : "starhotel-header-nav-link"
+                }
               >
                 Home
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a className="starhotel-header-nav-link" href="/roomsAndSuites">
+              <NavLink
+                to="/roomsAndSuites"
+                className={({ isActive }) =>
+                  isActive
+                    ? "starhotel-header-nav-link starhotel-header-active"
+                    : "starhotel-header-nav-link"
+                }
+              >
                 Rooms and Suites
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a className="starhotel-header-nav-link" href="/findBooking">
+              <NavLink
+                to="/findBooking"
+                className={({ isActive }) =>
+                  isActive
+                    ? "starhotel-header-nav-link starhotel-header-active"
+                    : "starhotel-header-nav-link"
+                }
+              >
                 Find my Booking
-              </a>
+              </NavLink>
             </li>
 
             {isLoggedIn ? (
@@ -56,14 +74,21 @@ const Header = () => {
             ) : (
               <>
                 <li>
-                  <a className="starhotel-header-nav-link" href="/login">
+                  <NavLink
+                    to="/login"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "starhotel-header-nav-link starhotel-header-active"
+                        : "starhotel-header-nav-link"
+                    }
+                  >
                     Login
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a className="starhotel-header-btn" href="/signup">
+                  <NavLink to="/signup" className="starhotel-header-btn">
                     Register
-                  </a>
+                  </NavLink>
                 </li>
               </>
             )}

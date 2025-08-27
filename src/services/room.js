@@ -22,3 +22,10 @@ export const fileToBase64 = (file) => {
     reader.onerror = (error) => reject(error);
   });
 };
+
+export const deleteRoom = async (id) => {
+  return await axios.delete(`http://localhost:4000/rooms/${id}`);
+};
+export const updateRoom = async (id, updatedData) => {
+  return await axios.put(`http://localhost:4000/rooms/${id}`, updatedData);
+};

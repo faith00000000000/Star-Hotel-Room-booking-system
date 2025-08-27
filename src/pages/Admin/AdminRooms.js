@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useState } from "react";
 import "../css/adminRooms.css";
-import { getAllRooms } from "../../services/room";
+import { deleteRoom, getAllRooms } from "../../services/room";
 import Sidebar from "./Sidebar";
 import { NavLink } from "react-router";
 
@@ -18,9 +18,13 @@ const AdminRoom = () => {
     )
   },[])
 
+  const handleDelete = async (id)=>{
+    await deleteRoom(id)
+    setRooms((prevRooms) => prevRooms.filter((room) => room.id !== id));
+  }
+
   return (
     <div className="adminRoom-container">
-      {/* Sidebar */}
         <Sidebar/>
 
       {/* Main Content */}
@@ -44,9 +48,6 @@ const AdminRoom = () => {
             <option>Available</option>
             <option>Occupied</option>
           </select>
-
-          
-
            <NavLink to="/admin/adminRooms/addRoomForm">
             <button className="adminRoom-add-btn">+ Add New Room</button>
           </NavLink>
@@ -62,7 +63,7 @@ const AdminRoom = () => {
               <div className="adminRoom-card-body">
                 <h3>{room.roomNo}</h3>
                 <p className="adminRoom-type">{room.type}</p>
-                <p className="adminRoom-price">${room.price}/night</p>
+                <p className="adminRoom-price">Rs{room.price}/night</p>
                 {/* <span className={`adminRoom-status ${room.status.toLowerCase()}`}>
                   {room.status}
                 </span> */}
@@ -77,7 +78,7 @@ const AdminRoom = () => {
                     <button className="edit-btn">Edit Room</button>
                   </NavLink>
 
-                  <button className="delete-btn">Delete</button>
+                  <button className="delete-btn" onClick={()=>handleDelete(room.id)}>Delete</button>
                 </div>
               </div>
             </div>

@@ -2,40 +2,56 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import "../cssUser/findBooking.css";
 import Header from "./Header";
-import { getBookingData } from "../../services/booking";
+import { cancelBooking, getBookingData, updateBooking } from "../../services/booking"; // ✅ use updateBooking
 import FindBookingRow from "./FindBookingRow";
+import Footer from "./Footer";
 
 export default function FindBooking() {
   const [bookings, setBookings] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const userId = localStorage.getItem("authToken")
+    const userId = localStorage.getItem("authToken");
     getBookingData().then((response) => {
-      let bookingData = []
+      let bookingData = [];
       if (response.data.length > 0) {
-        response.data.map(
-          (item,index)=>{
-            if(item.userId && item.userId === userId){
-              bookingData.push(item)
-            }
+        response.data.forEach((item) => {
+          if (item.userId && item.userId === userId) {
+            bookingData.push(item);
           }
-        )
-        setBookings(bookingData)
+        });
+        setBookings(bookingData);
       }
     });
   }, [navigate]);
 
-  // Cancel booking handler (only pending)
-  const handleCancel = (id) => {
+  // ✅ Cancel booking => update status to cancelled
+  const handleCancel = async (id) => {
     const confirmCancel = window.confirm("Are you sure you want to cancel this booking?");
     if (confirmCancel) {
-      setBookings((prev) => prev.filter((b) => b.id !== id));
+      try {
+        await cancelBooking(id)
+
+        setBookings((prev) =>
+          prev.map((b) =>
+            b.id === id ? { ...b, bookingStatus: "cancelled" } : b
+          )
+        );
+      } catch (err) {
+        console.error("Error cancelling booking:", err);
+      }
     }
   };
 
-  const pendingBookings = bookings.filter((b) => b.bookingStatus !== "confirmed");
-  const confirmedBookings = bookings.filter((b) => b.bookingStatus === "confirmed");
+  // ✅ Pending = not confirmed & not cancelled
+  const pendingBookings = bookings.filter(
+    (b) => b.bookingStatus !== "confirmed" && b.bookingStatus !== "cancelled"
+  );
+
+  // ✅ History = confirmed or cancelled
+  const historyBookings = bookings.filter(
+    (b) => b.bookingStatus === "confirmed" || b.bookingStatus === "cancelled"
+  );
 
   return (
     <div className="bookinghistory-page">
@@ -78,7 +94,7 @@ export default function FindBooking() {
       {/* History Section */}
       <section className="bookinghistory-container history-section">
         <h2>Booking History</h2>
-        {confirmedBookings.length === 0 ? (
+        {historyBookings.length === 0 ? (
           <p className="no-bookings">No booking history yet.</p>
         ) : (
           <table className="bookinghistory-table">
@@ -97,11 +113,12 @@ export default function FindBooking() {
               </tr>
             </thead>
             <tbody>
-              <FindBookingRow bookings={confirmedBookings} showCancel={false} showExtra={true} />
+              <FindBookingRow bookings={historyBookings} showCancel={false} showExtra={true} />
             </tbody>
           </table>
         )}
       </section>
+      {/* <Footer/> */}
     </div>
   );
 }

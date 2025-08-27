@@ -14,7 +14,6 @@ import EditRoom from './pages/Admin/EditRoom';
 import FindBooking from './pages/UserPage/FindBooking';
 import RoomDescriptionPage from './pages/UserPage/RoomDescriptionPage';
 import AdminLayout from './pages/Admin/AdminLayout';
-import CartPage from './pages/UserPage/CartPage';
 import CheckoutPage from './pages/UserPage/CheckoutPage';
 
 
@@ -42,7 +41,7 @@ function App() {
         <Route path= "/admin/adminRooms" element={<AdminRooms/>}></Route>
         <Route path= "/admin/adminRooms/addRoomForm" element={<AddRoomForm/>}></Route>
         <Route path= "/admin/bookingManagement" element={<BookingManagement/>}></Route>
-        <Route path= "/admin/editRoom/:id" element={<EditRoom/>}></Route>
+        <Route path= "/admin/editRoom/:id" element={<AddRoomForm/>}></Route>
       </Route>
 
 

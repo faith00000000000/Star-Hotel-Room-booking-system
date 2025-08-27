@@ -1,6 +1,5 @@
 const FindBookingRow = ({ bookings, onCancel, showCancel = true, showExtra = false }) => {
   return bookings.map((b, index) => {
-    // safety checks
     const checkInDate = b.checkIn ? new Date(b.checkIn) : null;
     const checkOutDate = b.checkOut ? new Date(b.checkOut) : null;
 
@@ -32,11 +31,12 @@ const FindBookingRow = ({ bookings, onCancel, showCancel = true, showExtra = fal
           </span>
         </td>
 
-        {showCancel && (
+        {showCancel && b.bookingStatus === "pending" && (
           <td>
             <button onClick={() => onCancel(b.id)}>Cancel</button>
           </td>
         )}
+        
       </tr>
     );
   });

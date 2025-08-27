@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../css/bookingManagement.css";
 import Sidebar from "../Admin/Sidebar";
-import { getBookingData, updateBooking } from "../../services/booking";
+import { getBookingData, updateBooking, cancelBooking } from "../../services/booking";
 
 const BookingManagement = () => {
   const [bookings, setBookings] = useState([]);
@@ -24,6 +24,19 @@ const BookingManagement = () => {
       );
     } catch (error) {
       console.error("Error confirming booking:", error);
+    }
+  };
+
+  // cancel booking handler
+  const handleCancel = async (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to cancel this booking?");
+    if (!confirmDelete) return;
+
+    try {
+      await cancelBooking(id);
+      setBookings((prev) => prev.filter((b) => b.id !== id));
+    } catch (error) {
+      console.error("Error cancelling booking:", error);
     }
   };
 
@@ -73,7 +86,12 @@ const BookingManagement = () => {
                     </td>
                     <td>₨ {total.toLocaleString()}</td>
                     <td>
-                      <button className="bm-btn">View</button>
+                      {/* Cancel */}
+                      <button className="bm-btn bm-cancel" onClick={() => handleCancel(b.id)}>
+                        Cancel
+                      </button>
+
+                      {/* Confirm */}
                       <button
                         className={`bm-btn ${
                           b.bookingStatus === "confirmed"

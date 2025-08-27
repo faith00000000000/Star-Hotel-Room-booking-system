@@ -3,8 +3,10 @@ import "../cssUser/roomDescriptionPage.css";
 import { getRoomById } from "../../services/room";
 import Header from "./Header";
 import { useParams } from "react-router";
-import { addBooking } from "../../services/booking";
+import { addBooking, getBookedDates } from "../../services/booking";
 import { getUserById, updateUserBooking } from "../../services/user";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const RoomDescriptionPage = () => {
   const { id } = useParams();
@@ -12,14 +14,17 @@ const RoomDescriptionPage = () => {
   const [bookings, setBookings] = useState([]);
   const [room, setRoom] = useState(null);
   const [showForm, setShowForm] = useState(false);
+  const [bookedDates, setBookedDates] = useState([]);
+
   const [formData, setFormData] = useState({
     name: "",
-    checkIn: "",
-    checkOut: "",
+    checkIn: null,
+    checkOut: null,
     phone: "",
     email: "",
   });
 
+  // Fetch user, room, and booked dates
   useEffect(() => {
     const userId = localStorage.getItem("authToken");
     const role = localStorage.getItem("role");
@@ -40,20 +45,38 @@ const RoomDescriptionPage = () => {
         setRoom(response.data);
       }
     });
+
+    // Fetch booked dates for this room
+    getBookedDates(id).then((bookings) => {
+      if (bookings && bookings.length > 0) {
+        let allDates = [];
+        bookings.forEach((booking) => {
+          const checkIn = new Date(booking.checkIn);
+          const checkOut = new Date(booking.checkOut);
+          for (
+            let d = new Date(checkIn);
+            d <= checkOut;
+            d.setDate(d.getDate() + 1)
+          ) {
+            allDates.push(new Date(d));
+          }
+        });
+        setBookedDates(allDates);
+      }
+    });
   }, [id]);
 
   if (!room) {
     return <p>Loading room details...</p>;
   }
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (field, value) => {
+    setFormData({ ...formData, [field]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Only users can book
     if (localStorage.getItem("role") !== "user") {
       alert("Only registered users can make bookings.");
       return;
@@ -61,6 +84,8 @@ const RoomDescriptionPage = () => {
 
     addBooking({
       ...formData,
+      checkIn: formData.checkIn.toISOString().split("T")[0],
+      checkOut: formData.checkOut.toISOString().split("T")[0],
       roomId: id,
       bookingStatus: "pending",
       roomName: room.roomName,
@@ -71,6 +96,8 @@ const RoomDescriptionPage = () => {
 
     updateUserBooking(userId, {
       ...formData,
+      checkIn: formData.checkIn.toISOString().split("T")[0],
+      checkOut: formData.checkOut.toISOString().split("T")[0],
       roomId: id,
     });
 
@@ -82,38 +109,36 @@ const RoomDescriptionPage = () => {
     <div>
       <Header />
       <div className="room-description">
-        {/* Breadcrumb */}
-        <p className="breadcrumb">
-          <span>{room.name}</span>
-        </p>
-
         {/* Hero Image */}
-        <img src={room.image} alt={room.name} className="room-hero" />
+        <img src={room.image} alt={room.roomName} className="room-hero" />
 
-        {/* Title & Description */}
-        <h1>{room.name}</h1>
-        <p className="room-text">{room.description}</p>
+        {/* Title */}
+        <h1>{room.roomName}</h1>
 
-        {/* Room Details */}
-        <h2>Room Type</h2>
-        <div className="room-type">
-          <div>
-            <span>Room Size</span>
-            <p>{room.details?.size || "N/A"}</p>
-          </div>
-          <div>
-            <span>Special Facilities</span>
-            <p>{room.facilities || "N/A"}</p>
-          </div>
+        {/* Basic Info */}
+        <div className="room-info">
+          <p>
+            <strong>Room No:</strong> {room.roomNo}
+          </p>
+          <p>
+            <strong>Type:</strong> {room.type}
+          </p>
+          <p>
+            <strong>Price:</strong> ${room.price}
+          </p>
         </div>
 
-        {/* Amenities */}
-        <h2>Amenities</h2>
-        <ul className="amenities">
-          {room.amenities?.length > 0 ? (
-            room.amenities.map((item, index) => <li key={index}>✅ {item}</li>)
+        {/* Description */}
+        <h2>Description</h2>
+        <p className="room-text">{room.description}</p>
+
+        {/* Facilities */}
+        <h2>Facilities</h2>
+        <ul className="facilities-list">
+          {room.facilities && room.facilities.length > 0 ? (
+            room.facilities.map((item, index) => <li key={index}>{item}</li>)
           ) : (
-            <li>No amenities listed</li>
+            <li>No facilities listed</li>
           )}
         </ul>
 
@@ -131,27 +156,29 @@ const RoomDescriptionPage = () => {
                 type="text"
                 name="name"
                 value={formData.name}
-                onChange={handleChange}
+                onChange={(e) => handleChange("name", e.target.value)}
                 required
               />
             </label>
             <label>
               Check-In Date:
-              <input
-                type="date"
-                name="checkIn"
-                value={formData.checkIn}
-                onChange={handleChange}
+              <DatePicker
+                selected={formData.checkIn}
+                onChange={(date) => handleChange("checkIn", date)}
+                excludeDates={bookedDates}
+                minDate={new Date()}
+                placeholderText="Select check-in date"
                 required
               />
             </label>
             <label>
               Check-Out Date:
-              <input
-                type="date"
-                name="checkOut"
-                value={formData.checkOut}
-                onChange={handleChange}
+              <DatePicker
+                selected={formData.checkOut}
+                onChange={(date) => handleChange("checkOut", date)}
+                excludeDates={bookedDates}
+                minDate={formData.checkIn || new Date()}
+                placeholderText="Select check-out date"
                 required
               />
             </label>
@@ -161,7 +188,7 @@ const RoomDescriptionPage = () => {
                 type="tel"
                 name="phone"
                 value={formData.phone}
-                onChange={handleChange}
+                onChange={(e) => handleChange("phone", e.target.value)}
                 required
               />
             </label>
@@ -171,7 +198,7 @@ const RoomDescriptionPage = () => {
                 type="email"
                 name="email"
                 value={formData.email}
-                onChange={handleChange}
+                onChange={(e) => handleChange("email", e.target.value)}
                 required
               />
             </label>

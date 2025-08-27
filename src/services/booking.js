@@ -31,3 +31,16 @@ export const updateBooking = async (id, updateData) => {
 //   let data = await axios.delete(`http://localhost:4000/booking/${id}`);
 //   return data;
 // };
+// 🆕 Cancel booking (DELETE)
+export const cancelBooking = async (id) => {
+  return await axios.delete(`http://localhost:4000/booking/${id}`);
+};
+
+export const getBookedDates = async (roomId) => {
+  let data = (await getBookingData()).data;
+  if (data && data.length > 0) {
+    // Only return bookings of this room
+    return data.filter((element) => element.roomId === roomId);
+  }
+  return [];
+};
