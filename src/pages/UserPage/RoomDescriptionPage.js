@@ -24,7 +24,6 @@ const RoomDescriptionPage = () => {
     email: "",
   });
 
-  // Fetch user, room, and booked dates
   useEffect(() => {
     const userId = localStorage.getItem("authToken");
     const role = localStorage.getItem("role");
@@ -46,18 +45,13 @@ const RoomDescriptionPage = () => {
       }
     });
 
-    // Fetch booked dates for this room
     getBookedDates(id).then((bookings) => {
       if (bookings && bookings.length > 0) {
         let allDates = [];
         bookings.forEach((booking) => {
           const checkIn = new Date(booking.checkIn);
           const checkOut = new Date(booking.checkOut);
-          for (
-            let d = new Date(checkIn);
-            d <= checkOut;
-            d.setDate(d.getDate() + 1)
-          ) {
+          for (let d = new Date(checkIn); d <= checkOut; d.setDate(d.getDate() + 1)) {
             allDates.push(new Date(d));
           }
         });
@@ -109,30 +103,18 @@ const RoomDescriptionPage = () => {
     <div>
       <Header />
       <div className="room-description">
-        {/* Hero Image */}
         <img src={room.image} alt={room.roomName} className="room-hero" />
-
-        {/* Title */}
         <h1>{room.roomName}</h1>
 
-        {/* Basic Info */}
         <div className="room-info">
-          <p>
-            <strong>Room No:</strong> {room.roomNo}
-          </p>
-          <p>
-            <strong>Type:</strong> {room.type}
-          </p>
-          <p>
-            <strong>Price:</strong> ${room.price}
-          </p>
+          <p><strong>Room No:</strong> {room.roomNo}</p>
+          <p><strong>Type:</strong> {room.type}</p>
+          <p><strong>Price:</strong> ${room.price}</p>
         </div>
 
-        {/* Description */}
         <h2>Description</h2>
         <p className="room-text">{room.description}</p>
 
-        {/* Facilities */}
         <h2>Facilities</h2>
         <ul className="facilities-list">
           {room.facilities && room.facilities.length > 0 ? (
@@ -142,7 +124,6 @@ const RoomDescriptionPage = () => {
           )}
         </ul>
 
-        {/* Book Now */}
         {!showForm ? (
           <button className="book-btn" onClick={() => setShowForm(true)}>
             Book Now
@@ -150,61 +131,66 @@ const RoomDescriptionPage = () => {
         ) : (
           <form className="booking-form" onSubmit={handleSubmit}>
             <h2>Book This Room</h2>
-            <label>
-              Name:
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={(e) => handleChange("name", e.target.value)}
-                required
-              />
-            </label>
-            <label>
-              Check-In Date:
-              <DatePicker
-                selected={formData.checkIn}
-                onChange={(date) => handleChange("checkIn", date)}
-                excludeDates={bookedDates}
-                minDate={new Date()}
-                placeholderText="Select check-in date"
-                required
-              />
-            </label>
-            <label>
-              Check-Out Date:
-              <DatePicker
-                selected={formData.checkOut}
-                onChange={(date) => handleChange("checkOut", date)}
-                excludeDates={bookedDates}
-                minDate={formData.checkIn || new Date()}
-                placeholderText="Select check-out date"
-                required
-              />
-            </label>
-            <label>
-              Phone Number:
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={(e) => handleChange("phone", e.target.value)}
-                required
-              />
-            </label>
-            <label>
-              Email:
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={(e) => handleChange("email", e.target.value)}
-                required
-              />
-            </label>
-            <button type="submit" className="submit-btn">
-              Confirm Booking
-            </button>
+
+            <div className="form-row">
+              <label>
+                Name:
+                <input
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) => handleChange("name", e.target.value)}
+                  required
+                />
+              </label>
+              <label>
+                Phone:
+                <input
+                  type="tel"
+                  value={formData.phone}
+                  onChange={(e) => handleChange("phone", e.target.value)}
+                  required
+                />
+              </label>
+            </div>
+
+            <div className="form-row">
+              <label>
+                Email:
+                <input
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => handleChange("email", e.target.value)}
+                  required
+                />
+              </label>
+
+              <div className="date-row">
+                <label>
+                  Check-In:
+                  <DatePicker
+                    selected={formData.checkIn}
+                    onChange={(date) => handleChange("checkIn", date)}
+                    minDate={new Date()}
+                    excludeDates={bookedDates}
+                    placeholderText="Select check-in date"
+                    required
+                  />
+                </label>
+                <label>
+                  Check-Out:
+                  <DatePicker
+                    selected={formData.checkOut}
+                    onChange={(date) => handleChange("checkOut", date)}
+                    minDate={formData.checkIn || new Date()}
+                    excludeDates={bookedDates}
+                    placeholderText="Select check-out date"
+                    required
+                  />
+                </label>
+              </div>
+            </div>
+
+            <button type="submit" className="submit-btn">Confirm Booking</button>
           </form>
         )}
       </div>

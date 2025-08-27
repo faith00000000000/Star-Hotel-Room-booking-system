@@ -1,11 +1,12 @@
-// import React, { useState } from "react";
+// import React, { useEffect, useState } from "react";
 // import "../css/addRoomForm.css";
-// import { addRooms, fileToBase64 } from "../../services/room";
+// import { addRooms, fileToBase64, getRoomById, updateRoom } from "../../services/room";
 // import { toast } from "react-toastify";
-// import { useNavigate } from "react-router";
+// import { useNavigate, useParams } from "react-router";
 
 // const AddRoomForm = () => {
 //   const navigate = useNavigate();
+//   const { id } = useParams(); // check if we're editing
 
 //   const [roomData, setRoomData] = useState({
 //     roomNo: "",
@@ -20,14 +21,18 @@
 
 //   const [errors, setErrors] = useState({});
 
-//   const facilitiesOptions = [
-//     "Wi-Fi",
-//     "TV",
-//     "AC",
-//     "Mini Bar",
-//     "Balcony",
-//     "Room Service",
-//   ];
+//   const facilitiesOptions = ["Wi-Fi", "TV", "AC", "Mini Bar", "Balcony", "Room Service"];
+
+//   // Fetch room details if editing
+//   useEffect(() => {
+//     if (id) {
+//       getRoomById(id).then((res) => {
+//         if (res.data) {
+//           setRoomData(res.data);
+//         }
+//       });
+//     }
+//   }, [id]);
 
 //   const handleChange = (e) => {
 //     const { name, value } = e.target;
@@ -49,12 +54,11 @@
 
 //   const validateForm = () => {
 //     let formErrors = {};
-
 //     if (roomData.roomNo.trim() === "") formErrors.roomNo = "Room number is required.";
 //     if (roomData.roomName.trim() === "") formErrors.roomName = "Room name is required.";
 //     if (roomData.description.trim() === "") formErrors.description = "Description is required.";
 //     if (roomData.type.trim() === "") formErrors.type = "Room type is required.";
-//     if (roomData.price.trim() === "") formErrors.price = "Price is required.";
+//     if (roomData.price.toString().trim() === "") formErrors.price = "Price is required.";
 //     if (roomData.facilities.length === 0) formErrors.facilities = "Select at least one facility.";
 //     if (!roomData.image || roomData.image.trim() === "") formErrors.image = "Room image is required.";
 
@@ -66,27 +70,29 @@
 //     e.preventDefault();
 
 //     if (validateForm()) {
-//       addRooms({ ...roomData, price: Number(roomData.price) })
-//         .then((res) => {
-//           if (res.data) {
-//             toast.success("Room added successfully!");
-//             setRoomData({
-//               roomNo: "",
-//               roomName: "",
-//               type: "Standard",
-//               price: "",
-//               description: "",
-//               facilities: [],
-//               status: "unbooked",
-//               image: "",
-//             });
-//             setErrors({});
+//       if (id) {
+//         // 🔹 Update existing room
+//         updateRoom(id, { ...roomData, price: Number(roomData.price) })
+//           .then(() => {
+//             toast.success("Room updated successfully!");
 //             navigate("/admin/adminRooms");
-//           }
-//         })
-//         .catch((e) => {
-//           toast.error(e.message || "Error adding room");
-//         });
+//           })
+//           .catch((e) => {
+//             toast.error(e.message || "Error updating room");
+//           });
+//       } else {
+//         // 🔹 Add new room
+//         addRooms({ ...roomData, price: Number(roomData.price) })
+//           .then((res) => {
+//             if (res.data) {
+//               toast.success("Room added successfully!");
+//               navigate("/admin/adminRooms");
+//             }
+//           })
+//           .catch((e) => {
+//             toast.error(e.message || "Error adding room");
+//           });
+//       }
 //     } else {
 //       toast.error("Please fix the errors before submitting.");
 //     }
@@ -95,40 +101,25 @@
 //   return (
 //     <div className="add-room-container">
 //       {/* X Button */}
-//       <button
-//         className="close-btn"
-//         onClick={() => navigate("/admin/adminRooms")}
-//       >
+//       <button className="close-btn" onClick={() => navigate("/admin/adminRooms")}>
 //         ×
 //       </button>
 
-//       <h2>Add New Room</h2>
+//       <h2>{id ? "Edit Room" : "Add New Room"}</h2>
+
 //       <form className="add-room-form" onSubmit={handleSubmit}>
-//         {/* Room Number */}
 //         <label>
 //           Room Number:
-//           <input
-//             type="text"
-//             name="roomNo"
-//             value={roomData.roomNo}
-//             onChange={handleChange}
-//           />
+//           <input type="text" name="roomNo" value={roomData.roomNo} onChange={handleChange} />
 //         </label>
 //         {errors.roomNo && <span className="error">{errors.roomNo}</span>}
 
-//         {/* Room Name */}
 //         <label>
 //           Room Name:
-//           <input
-//             type="text"
-//             name="roomName"
-//             value={roomData.roomName}
-//             onChange={handleChange}
-//           />
+//           <input type="text" name="roomName" value={roomData.roomName} onChange={handleChange} />
 //         </label>
 //         {errors.roomName && <span className="error">{errors.roomName}</span>}
 
-//         {/* Room Type */}
 //         <label>
 //           Room Type:
 //           <select name="type" value={roomData.type} onChange={handleChange}>
@@ -139,39 +130,21 @@
 //         </label>
 //         {errors.type && <span className="error">{errors.type}</span>}
 
-//         {/* Price */}
 //         <label>
 //           Price per Night:
-//           <input
-//             type="number"
-//             name="price"
-//             value={roomData.price}
-//             onChange={handleChange}
-//           />
+//           <input type="number" name="price" value={roomData.price} onChange={handleChange} />
 //         </label>
 //         {errors.price && <span className="error">{errors.price}</span>}
 
-//         {/* Description */}
 //         <label>
 //           Description:
-//           <textarea
-//             name="description"
-//             value={roomData.description}
-//             onChange={handleChange}
-//             rows="4"
-//           />
+//           <textarea name="description" value={roomData.description} onChange={handleChange} rows="4" />
 //         </label>
 //         {errors.description && <span className="error">{errors.description}</span>}
 
-//         {/* Facilities */}
 //         <label>
 //           Facilities:
-//           <select
-//             name="facilities"
-//             multiple
-//             value={roomData.facilities}
-//             onChange={handleFacilitiesChange}
-//           >
+//           <select name="facilities" multiple value={roomData.facilities} onChange={handleFacilitiesChange}>
 //             {facilitiesOptions.map((facility, index) => (
 //               <option key={index} value={facility}>
 //                 {facility}
@@ -181,19 +154,12 @@
 //         </label>
 //         {errors.facilities && <span className="error">{errors.facilities}</span>}
 
-//         {/* Image */}
 //         <label>
 //           Room Image:
-//           <input
-//             type="file"
-//             name="image"
-//             accept="image/*"
-//             onChange={handleFileChange}
-//           />
+//           <input type="file" name="image" accept="image/*" onChange={handleFileChange} />
 //         </label>
 //         {errors.image && <span className="error">{errors.image}</span>}
 
-//         {/* Preview */}
 //         {roomData.image && (
 //           <img
 //             src={roomData.image}
@@ -202,7 +168,7 @@
 //           />
 //         )}
 
-//         <button type="submit">Add Room</button>
+//         <button type="submit">{id ? "Update Room" : "Add Room"}</button>
 //       </form>
 //     </div>
 //   );
@@ -217,7 +183,7 @@ import { useNavigate, useParams } from "react-router";
 
 const AddRoomForm = () => {
   const navigate = useNavigate();
-  const { id } = useParams(); // check if we're editing
+  const { id } = useParams(); // check if editing
 
   const [roomData, setRoomData] = useState({
     roomNo: "",
@@ -231,16 +197,13 @@ const AddRoomForm = () => {
   });
 
   const [errors, setErrors] = useState({});
-
   const facilitiesOptions = ["Wi-Fi", "TV", "AC", "Mini Bar", "Balcony", "Room Service"];
 
   // Fetch room details if editing
   useEffect(() => {
     if (id) {
       getRoomById(id).then((res) => {
-        if (res.data) {
-          setRoomData(res.data);
-        }
+        if (res.data) setRoomData(res.data);
       });
     }
   }, [id]);
@@ -265,13 +228,13 @@ const AddRoomForm = () => {
 
   const validateForm = () => {
     let formErrors = {};
-    if (roomData.roomNo.trim() === "") formErrors.roomNo = "Room number is required.";
-    if (roomData.roomName.trim() === "") formErrors.roomName = "Room name is required.";
-    if (roomData.description.trim() === "") formErrors.description = "Description is required.";
-    if (roomData.type.trim() === "") formErrors.type = "Room type is required.";
-    if (roomData.price.toString().trim() === "") formErrors.price = "Price is required.";
+    if (!roomData.roomNo.trim()) formErrors.roomNo = "Room number is required.";
+    if (!roomData.roomName.trim()) formErrors.roomName = "Room name is required.";
+    if (!roomData.description.trim()) formErrors.description = "Description is required.";
+    if (!roomData.type.trim()) formErrors.type = "Room type is required.";
+    if (!roomData.price.toString().trim()) formErrors.price = "Price is required.";
     if (roomData.facilities.length === 0) formErrors.facilities = "Select at least one facility.";
-    if (!roomData.image || roomData.image.trim() === "") formErrors.image = "Room image is required.";
+    if (!roomData.image || !roomData.image.trim()) formErrors.image = "Room image is required.";
 
     setErrors(formErrors);
     return Object.keys(formErrors).length === 0;
@@ -280,38 +243,32 @@ const AddRoomForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (validateForm()) {
-      if (id) {
-        // 🔹 Update existing room
-        updateRoom(id, { ...roomData, price: Number(roomData.price) })
-          .then(() => {
-            toast.success("Room updated successfully!");
-            navigate("/admin/adminRooms");
-          })
-          .catch((e) => {
-            toast.error(e.message || "Error updating room");
-          });
-      } else {
-        // 🔹 Add new room
-        addRooms({ ...roomData, price: Number(roomData.price) })
-          .then((res) => {
-            if (res.data) {
-              toast.success("Room added successfully!");
-              navigate("/admin/adminRooms");
-            }
-          })
-          .catch((e) => {
-            toast.error(e.message || "Error adding room");
-          });
-      }
-    } else {
+    if (!validateForm()) {
       toast.error("Please fix the errors before submitting.");
+      return;
+    }
+
+    if (id) {
+      // Update existing room
+      updateRoom(id, { ...roomData, price: Number(roomData.price) })
+        .then(() => {
+          toast.success("Room updated successfully!");
+          navigate("/admin/adminRooms");
+        })
+        .catch((err) => toast.error(err.message || "Error updating room"));
+    } else {
+      // Add new room
+      addRooms({ ...roomData, price: Number(roomData.price) })
+        .then(() => {
+          toast.success("Room added successfully!");
+          navigate("/admin/adminRooms");
+        })
+        .catch((err) => toast.error(err.message || "Error adding room"));
     }
   };
 
   return (
     <div className="add-room-container">
-      {/* X Button */}
       <button className="close-btn" onClick={() => navigate("/admin/adminRooms")}>
         ×
       </button>
@@ -357,9 +314,7 @@ const AddRoomForm = () => {
           Facilities:
           <select name="facilities" multiple value={roomData.facilities} onChange={handleFacilitiesChange}>
             {facilitiesOptions.map((facility, index) => (
-              <option key={index} value={facility}>
-                {facility}
-              </option>
+              <option key={index} value={facility}>{facility}</option>
             ))}
           </select>
         </label>

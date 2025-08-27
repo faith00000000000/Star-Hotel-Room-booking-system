@@ -36,18 +36,18 @@ const AdminRoom = () => {
 
         {/* Filters */}
         <div className="adminRoom-filters">
-          <select defaultValue="All Types">
+          {/* <select defaultValue="All Types">
             <option>All Types</option>
             <option>Standard Single</option>
             <option>Executive</option>
             <option>Suite</option>
-          </select>
+          </select> */}
 
-          <select defaultValue="All Status">
+          {/* <select defaultValue="All Status">
             <option>All Status</option>
             <option>Available</option>
             <option>Occupied</option>
-          </select>
+          </select> */}
            <NavLink to="/admin/adminRooms/addRoomForm">
             <button className="adminRoom-add-btn">+ Add New Room</button>
           </NavLink>

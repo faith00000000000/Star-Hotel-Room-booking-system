@@ -12,9 +12,9 @@ const Footer = () => {
             </div>
             <div>
               <h3>Contact Us</h3>
-              <p>23, Fola Osibo, Lekki Phase 1</p>
-              <p>08185956620</p>
-              <p>support@starhotels.com</p>
+              <p>Durbar Square Bhaktapur, Nepal</p>
+              <p>1234567890</p>
+              <p>starhotel@gmail.com</p>
             </div>
             <div>
               <h3>Follow Us</h3>

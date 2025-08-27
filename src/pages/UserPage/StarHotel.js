@@ -11,7 +11,7 @@ import hotel3 from "../../assets/img/hotel-3.webp";
 import customer1 from "../../assets/img/customer1.webp";
 import customer2 from "../../assets/img/customer2.webp";
 import customer3 from "../../assets/img/customer3.webp";
-import { useNavigate } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import Header from "./Header";   
 import Footer from "./Footer";
 
@@ -36,33 +36,10 @@ export default function StarHotel() {
               We are focused on providing clients with the highest level
               of comfort and excellent affordable rates
             </p>
-            <a href="/booking" className="starhotel-btn starhotel-btn-fill">
-              Book Now
-            </a>
+            
           </div>
 
-          {/* Right Booking Form */}
-          <div className="starhotel-booking-form">
-            <h3>Scared you can't afford it?</h3>
-            <p>
-              Don’t worry, our hotel offers the best <br />
-              affordable rates you can ever find.
-            </p>
-            <form>
-              <input type="date" placeholder="Arrival Date" />
-              <input type="date" placeholder="Departure Date" />
-              <input type="number" placeholder="Guests" />
-              <select>
-                <option>Room type</option>
-                <option>Standard Room</option>
-                <option>Executive Room</option>
-                <option>King Suite</option>
-              </select>
-              <button type="submit" className="starhotel-btn starhotel-btn-fill">
-                Search
-              </button>
-            </form>
-          </div>
+          
         </div>
       </section>
 
@@ -156,12 +133,12 @@ export default function StarHotel() {
         <li> Executive Room</li>
         <li> King Suite</li>
       </ul>
-      <a
-        href="/rooms-and-suites"
-        className="starhotel-btn starhotel-btn-fill starhotel-btn-large"
-      >
-        View All
-      </a>
+      <NavLink
+    to="/roomsAndSuites"
+    className="starhotel-btn starhotel-btn-fill starhotel-btn-large"
+  >
+    View All
+  </NavLink>
     </div>
   </div>
 </section>
@@ -181,8 +158,8 @@ export default function StarHotel() {
         <div className="starhotel-cards-container">
           <div className="starhotel-card">
             <img src={customer1} alt="customer 1" />
-            <h2>Mark Essien</h2>
-            <h3>Lagos, Nigeria</h3>
+            <h2>Elon Musk</h2>
+            <h3>Bhaktapur, Nepal</h3>
             <p>
               Words can't explain the kind of treatment I received. They are the
               best in the country.
@@ -190,8 +167,8 @@ export default function StarHotel() {
           </div>
           <div className="starhotel-card">
             <img src={customer2} alt="customer 2" />
-            <h2>Seyi Onifade</h2>
-            <h3>Lagos, Nigeria</h3>
+            <h2>Mr. Beast</h2>
+            <h3>Kathmandu, Nepal</h3>
             <p>
               Star hotels makes you feel the best room quality that makes you
               feel the comfort of a home.
@@ -199,8 +176,8 @@ export default function StarHotel() {
           </div>
           <div className="starhotel-card">
             <img src={customer3} alt="customer 3" />
-            <h2>Fayemi David</h2>
-            <h3>Lagos, Nigeria</h3>
+            <h2>Sita Shrestha</h2>
+            <h3>Patan, Nepal</h3>
             <p>
               My Family and I are very happy when we lodge. They are by far the
               best in the universe.
@@ -209,37 +186,7 @@ export default function StarHotel() {
         </div>
       </div>
 
-      {/* Footer */}
-      {/* <footer className="starhotel-footer">
-        <div className="starhotel-footer-container">
-          <nav className="starhotel-footer-nav">
-            <div>
-              <h3>Star Hotels</h3>
-              <p>Hospitality and Comfort are our watchwords</p>
-            </div>
-            <div>
-              <h3>Contact Us</h3>
-              <p>23, Fola Osibo, Lekki Phase 1</p>
-              <p>08185956620</p>
-              <p>support@starhotels.com</p>
-            </div>
-            <div>
-              <h3>Follow Us</h3>
-              <ul>
-                <li>
-                  <a href="#">Facebook</a>
-                </li>
-                <li>
-                  <a href="#">Twitter</a>
-                </li>
-                <li>
-                  <a href="#">Instagram</a>
-                </li>
-              </ul>
-            </div>
-          </nav>
-        </div>
-      </footer> */}
+      
 
       <Footer/>
     </div>

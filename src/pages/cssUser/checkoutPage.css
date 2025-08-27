@@ -103,7 +103,7 @@
 }
 
 .confirm-btn {
-  background: #1abc9c;
+  background: #d4af37;
   color: #fff;
   border: none;
   padding: 12px 25px;
@@ -114,5 +114,5 @@
 }
 
 .confirm-btn:hover {
-  background: #16a085;
+  background: #b8962f;
 }

@@ -113,21 +113,129 @@
 .btn-outline {
   border: 1px solid #d4af37;
   background: none;
-  padding: 6px 12px;
-  border-radius: 6px;
+  padding: 4px 10px;      /* smaller padding */
+  font-size: 14px;        /* smaller text */
+  border-radius: 4px;     /* less rounded for smaller look */
   cursor: pointer;
   color: #d4af37;
   transition: all 0.3s ease;
+  text-decoration: none;  /* removes underline */
+  display: inline-block;  /* make NavLink behave like button */
+  margin-left: 201px;
 }
 
 .btn-outline:hover {
   background: #d4af37;
   color: #fff;
+  text-decoration: none;
 }
+
+
 
 .no-rooms {
   grid-column: span 3;
   text-align: center;
   font-size: 16px;
   color: #888;
+}
+/* ================= RESPONSIVE - roomListRow.css ================= */
+
+/* Tablets / medium screens */
+@media (max-width: 1024px) {
+  .room-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+
+  .room-tabs {
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 40px;
+  }
+
+  .btn-outline {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Mobile screens */
+@media (max-width: 768px) {
+  .room-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .room-tabs {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .tab-btn {
+    font-size: 16px;
+    padding: 8px 12px;
+  }
+
+  .room-title {
+    font-size: 18px;
+  }
+
+  .room-desc {
+    font-size: 13px;
+  }
+
+  .room-price {
+    font-size: 14px;
+  }
+
+  .btn-outline {
+    padding: 6px 12px;
+    font-size: 13px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Very small devices (phones) */
+@media (max-width: 480px) {
+  .room-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .room-content {
+    padding: 10px;
+  }
+
+  .room-title {
+    font-size: 16px;
+  }
+
+  .room-desc {
+    font-size: 12px;
+  }
+
+  .room-price {
+    font-size: 13px;
+  }
+
+  .room-meta {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .btn-outline {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
 }
